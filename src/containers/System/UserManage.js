@@ -3,11 +3,13 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import './UserManage.scss';
 import { getAllUsers } from '../../services/userService';
+import ModalUser from './ModalUser';
 class UserManage extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            arrUsers: [],   
+            arrUsers: [],
+            isOpenModalUser: false
         };
     };
     async componentDidMount() {
@@ -18,18 +20,40 @@ class UserManage extends Component {
             });
         }
       };
+
+      handleAddNewUser = () => {
+        this.setState({
+            isOpenModalUser: true
+        });
+      };
+
+      toggleUserModal = () =>{
+        this.setState({
+            isOpenModalUser: !this.state.isOpenModalUser
+        });
+      };
+
     /** Life cycle
      *  Run your component
      * 1. Run constructor -> init state
-     * 2. Run Didmount
-     * 3. Render
+     * 2. Run Didmount: born #unmount
+     * 3. Render (re-render)
      */
     render() {
-        console.log(this.state)
         let arrUsers = this.state.arrUsers
         return (
             <div className="user-containers">
+                <ModalUser
+                    isOpen = {this.state.isOpenModalUser}
+                    toggleFromParent = {this.toggleUserModal}
+                 />
                 <div className="title text-center">Manage users</div>
+                <div className="mx-1">
+                    <button className="btn btn-primary px-3"
+                    onClick={() => this.handleAddNewUser()}
+                    >
+                        <i className="fas fa-plus"></i> Add New User</button>
+                </div>
                 <div className="users-table mt-4 mx-3">
                 <table id="customers">
                     <tr>
@@ -40,7 +64,6 @@ class UserManage extends Component {
                         <th>Action</th>
                     </tr>
                         {arrUsers && arrUsers.map((item, index) => {
-                            console.log(`Check map ${item}, ${index}`)
                             return(
                                 <tr>
                                      <td>{item.email}</td>

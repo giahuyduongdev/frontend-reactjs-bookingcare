@@ -22,13 +22,14 @@ class Login extends Component {
       this.setState({
         username: event.target.value
       });
+     // console.log(event.target.value)
     };
 
     handleOnChangePassword = (event) => {
       this.setState({
         password: event.target.value
       });
-
+      //console.log(event.target.value)
     };
 
     handleLogin = async () =>{
@@ -80,14 +81,14 @@ class Login extends Component {
                 </div>
                 <div className="col-12 form-group login-input">
                   <label>Password:</label>
-                  <div class="custom-input-password">
+                  <div className="custom-input-password">
                     <input type={this.state.isShowPassword ? 'text' : 'password'}
                      className="form-control" placeholder="Enter your password"
                     value={this.state.password}
                     onChange={(event) => {this.handleOnChangePassword(event)}}
                     ></input>
                     <span onClick={() => {this.handleShowHidePasword()}}>
-                    <i class={this.state.isShowPassword ? 'fas fa-eye' : 'fas fa-eye-slash'}></i>
+                    <i className={this.state.isShowPassword ? 'fas fa-eye' : 'fas fa-eye-slash'}></i>
                     </span>
                   </div>
                 </div>
@@ -95,7 +96,7 @@ class Login extends Component {
                   {this.state.errMessage}
                 </div>
                 <div className="col-12">
-                  <button class="btn-login"
+                  <button className="btn-login"
                   onClick={() => this.handleLogin()}
                   >Login</button>
                   </div>

@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import "./HomeHeader.scss";
+import { FormattedMessage } from "react-intl";
+import { LANGUAGES } from "../../utils";
 
 class HomeHeader extends Component {
 
     render() {
+      let language = this.props.language;
       return(
       <>
         <div className="home-header-container">
@@ -17,47 +21,49 @@ class HomeHeader extends Component {
               <div className="child-content">
                 <div>
                   <b>
-                    Chuyên Khoa
+                    <FormattedMessage id="homeheader.speciality" />
                   </b>
                 </div>
                 <div className="subs-title">
-                  Tìm bác sĩ theo chuyên khoa
+                  <FormattedMessage id="homeheader.searchdoctor" />
                 </div>
               </div>
               <div className="child-content">
               <div>
                   <b>
-                    Cơ sở y tế
+                    <FormattedMessage id="homeheader.health-facility" />
                   </b>
                 </div>
                 <div className="subs-title">
-                  Chọn bệnh viện phòng khám
+                  <FormattedMessage id="homeheader.select-room" />
                 </div>
               </div>
               <div className="child-content">
               <div>
                   <b>
-                    Bác sĩ
+                    <FormattedMessage id="homeheader.doctor" />
                   </b>
                 </div>
                 <div className="subs-title">
-                  Chọn bác sĩ giỏi
+                  <FormattedMessage id="homeheader.select-doctor" />
                 </div>
               </div>
               <div className="child-content">
               <div>
                   <b>
-                    Gói khám
+                    <FormattedMessage id="homeheader.fee" />
                   </b>
                 </div>
                 <div className="subs-title">
-                  Khám sức khỏe tổng quát
+                  <FormattedMessage id="homeheader.check-health" />
                 </div>
               </div>
             </div>
             <div className ="right-content">
               <div className="support">
-                <i className="fas fa-question-circle">Hỗ trợ</i>
+                <i className="fas fa-question-circle">
+                  <FormattedMessage id="homeheader.support" />
+                </i>
               </div>
               <div className="flag">
                 VN
@@ -140,7 +146,8 @@ class HomeHeader extends Component {
 
 const mapStateToProps = state => {
     return {
-        isLoggedIn: state.user.isLoggedIn
+        isLoggedIn: state.user.isLoggedIn,
+        language: state.app.language,
     };
 };
 

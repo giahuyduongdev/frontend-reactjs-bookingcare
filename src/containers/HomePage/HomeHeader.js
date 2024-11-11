@@ -5,7 +5,7 @@ import { FormattedMessage } from "react-intl";
 import { LANGUAGES } from "../../utils";
 
 import { changeLanguageApp } from "../../store/actions/appActions";
-import { withRouter } from "react-router"
+
 
 class HomeHeader extends Component {
   constructor() {
@@ -119,6 +119,7 @@ class HomeHeader extends Component {
             </div>
           </div>
         </div>
+        {this.props.isShowBanner === true && (
         <div className="home-header-banner">
           <div className="content-up">
             <div className="title1">
@@ -187,6 +188,7 @@ class HomeHeader extends Component {
             </div>
           </div>
         </div>
+        )}
       </>
     );
   }

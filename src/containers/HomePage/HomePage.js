@@ -11,6 +11,9 @@ class HomePage extends Component {
         <div>
           <HomeHeader isShowBanner={true} />
           <Specialty />
+          <div style={{ height: "300px"}}>
+
+          </div>
         </div>
     );
   }

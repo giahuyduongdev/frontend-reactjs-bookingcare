@@ -77,8 +77,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         processLogout: () => dispatch(actions.processLogout()),
-        changeLanguageAppRedux: (language) =>
-            dispatch(actions.changeLanguageApp(language)),
+        changeLanguageAppRedux: (language) => dispatch(actions.changeLanguageApp(language)),
     };
  };
 

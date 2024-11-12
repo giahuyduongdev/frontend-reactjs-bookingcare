@@ -7,7 +7,6 @@ import "./UserRedux.scss";
 // import Lightbox from "react-image-lightbox";
 // import "react-image-lightbox/style.css";
 
-import {getAllCodeService} from "../../../services/userService"
 
 // import TableManageUser from "./TableManageUser";
 class UserRedux extends Component {
@@ -37,31 +36,21 @@ class UserRedux extends Component {
       }
 
    async componentDidMount() {
-        // this.props.getGenderStart();
+        this.props.getGenderStart();
         // this.props.getPositionStart();
         // this.props.getRoleStart();
         
-    try {
-      let res = await getAllCodeService("GENDER");
-      console.log(res);
-      if (res && res.errCode === 0) {
-        this.setState({
-          genderArr: res.data,
-        });
-      }
-    } catch (e) {
-      console.log(e);
-    }
+
     }
 
-    // componentDidUpdate(prevProps, prevState, snapshot) {
-    //     if (prevProps.genderRedux !== this.props.genderRedux) {
-    //       let arrGenders = this.props.genderRedux;
-    //       this.setState({
-    //         genderArr: arrGenders,
-    //         gender: arrGenders && arrGenders.length > 0 ? arrGenders[0].keyMap : "",
-    //       });
-    //     }
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.genderRedux !== this.props.genderRedux) {
+          let arrGenders = this.props.genderRedux;
+          this.setState({
+            genderArr: arrGenders,
+            gender: arrGenders && arrGenders.length > 0 ? arrGenders[0].keyMap : "",
+          });
+        }
     //     if (prevProps.positionRedux !== this.props.positionRedux) {
     //       let arrPositions = this.props.positionRedux;
     //       this.setState({
@@ -101,7 +90,7 @@ class UserRedux extends Component {
     //         previewImgURL: "",
     //       });
     //     }
-    //   }
+      }
 
     // handleOnChangeImage = async (event) => {
     //     let data = event.target.files;
@@ -419,7 +408,7 @@ class UserRedux extends Component {
 const mapStateToProps = state => {
     return {
         language: state.app.language,
-        // genderRedux: state.admin.genders,
+        genderRedux: state.admin.genders,
         // roleRedux: state.admin.roles,
         // positionRedux: state.admin.positions,
         // isLoadingGender: state.admin.isLoadingGender,
@@ -429,7 +418,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        // getGenderStart: () => dispatch(actions.fetchGenderStart()),
+        getGenderStart: () => dispatch(actions.fetchGenderStart()),
         // getPositionStart: () => dispatch(actions.fetchPositionStart()),
         // getRoleStart: () => dispatch(actions.fetchRoleStart()),
         // createNewUser: (data) => dispatch(actions.createNewUser(data)),

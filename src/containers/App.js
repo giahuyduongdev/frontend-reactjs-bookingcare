@@ -22,7 +22,6 @@ import CustomScrollbars from "../components/CustomScrollbars";
 
 
 class App extends Component {
-
     handlePersistorState = () => {
         const { persistor } = this.props;
         let { bootstrapped } = persistor.getState();
@@ -36,6 +35,7 @@ class App extends Component {
             }
         }
     };
+
 
     componentDidMount() {
         this.handlePersistorState();

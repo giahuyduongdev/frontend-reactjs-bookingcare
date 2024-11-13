@@ -6,9 +6,9 @@ import * as actions from "../../../store/actions";
 import "./UserRedux.scss";
 
 import Lightbox from "react-image-lightbox";
-import "react-image-lightbox/style.css"; 
+import "react-image-lightbox/style.css"; // This only needs to be imported once in your app
 
-// import TableManageUser from "./TableManageUser";
+import TableManageUser from "./TableManageUser";
 
 class UserRedux extends Component {
   constructor(props) {
@@ -43,6 +43,10 @@ class UserRedux extends Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
+    //render=>didupdate
+    //hien tai(this) va qua khu(previous)
+    //[] [3]
+    //[3] [3]
     if (prevProps.genderRedux !== this.props.genderRedux) {
       let arrGenders = this.props.genderRedux;
       this.setState({
@@ -115,10 +119,9 @@ class UserRedux extends Component {
     let isValid = this.checkValidateInput();
     if (isValid === false) return;
 
-    let { action } = this.state;
+    let  {action} = this.state;
 
     if (action === CRUD_ACTIONS.CREATE) {
-      //fire redux create user
       this.props.createNewUser({
         email: this.state.email,
         password: this.state.password,
@@ -133,7 +136,6 @@ class UserRedux extends Component {
       });
     }
     if (action === CRUD_ACTIONS.EDIT) {
-      //fire redux edit user
       this.props.editAUserRedux({
         id: this.state.userEditId,
         email: this.state.email,
@@ -429,10 +431,10 @@ class UserRedux extends Component {
                 </button>
               </div>
               <div className="col-12 mb-5">
-                {/* <TableManageUser
+                <TableManageUser
                   handleEditUserFromParentKey={this.handleEditUserFromParent}
                   action={this.state.action}
-                /> */}
+                />
               </div>
             </div>
           </div>

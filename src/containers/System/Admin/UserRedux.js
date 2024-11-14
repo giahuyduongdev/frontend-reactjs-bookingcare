@@ -159,7 +159,7 @@ class UserRedux extends Component {
       "password",
       "firstName",
       "lastName",
-      "phoneNumber",
+      // "phoneNumber",
       "address",
     ];
     for (let i = 0; i < arrCheck.length; i++) {

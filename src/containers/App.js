@@ -10,9 +10,13 @@ import { userIsAuthenticated, userIsNotAuthenticated } from '../hoc/authenticati
 
 import { path } from '../utils'
 
+import NotFound from "./System/NotFound";
+
 import Home from '../routes/Home';
 import Login from './Auth/Login';
-import Header from './Header/Header';
+import Signup from "./Auth/Signup";
+import ForgotPassword from "./Auth/ForgotPassword";
+import RetrievePassword from "./Auth/RetrievePassword";
 import System from '../routes/System';
 
 
@@ -53,6 +57,9 @@ class App extends Component {
                                 <Switch>
                                     <Route path={path.HOME} exact component={(Home)} />
                                     <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
+                                    <Route path={path.SIGNUP} exact component={Signup} />
+                                    <Route path={path.FORGOT_PASSWORD} exact component={ForgotPassword}/>
+                                    <Route path={path.RETRIEVE_PASSWORD} component={RetrievePassword}/>
                                     <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
                                     <Route path={path.HOMEPAGE} component={HomePage} />
                                     <Route path={path.DETAIL_DOCTOR} component={DetailDoctor} />

@@ -3,22 +3,6 @@ General Style
 ---------------------*/
 
 
-body,
-html {
-  height: 100%;
-  font-family: 'Raleway', sans-serif;
-  font-weight: 400;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-.content-container{
-  background-color: #56baed;
-}
-
-body {
-  overflow: hidden;
-}
-
 .strip {
   height: 100%;
   width: 200%;
@@ -28,16 +12,7 @@ body {
   z-index: -1;
 }
 
-.container {
-  width: 550px;
-  height: 200px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-}
+
 
 .positive,
 .negative {

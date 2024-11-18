@@ -9,7 +9,7 @@ import { FormattedMessage } from "react-intl";
 import { handleLoginApi } from "../../services/userService";
 // import { userLoginSuccess } from "../../store/actions";
 
-import { createNewUserService } from "../../services/userService";
+import { registerNewUserService } from "../../services/userService";
 
 import { toast } from "react-toastify";
 
@@ -49,7 +49,7 @@ class Signup extends Component {
 
   createNewUser = async (data) => {
     try {
-      let response = await createNewUserService(data);
+      let response = await registerNewUserService(data);
       if (response && response.errCode !== 0) {
         toast.error(response.errMessage);
       } else {

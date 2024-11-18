@@ -9,7 +9,7 @@ import { FormattedMessage } from "react-intl";
 import { handleLoginApi } from "../../services/userService";
 // import { userLoginSuccess } from "../../store/actions";
 
-import { registerNewUserService } from "../../services/userService";
+import { registerNewUserService, postConfirmNewAccount } from "../../services/userService";
 
 import { toast } from "react-toastify";
 
@@ -53,7 +53,7 @@ class Signup extends Component {
       if (response && response.errCode !== 0) {
         toast.error(response.errMessage);
       } else {
-        toast.success("User created!");
+        toast.success("User created, pls check your email to authenticate your account!");
         this.setState({
           password: "",
           email: "",
@@ -63,6 +63,8 @@ class Signup extends Component {
           isShowPassword: false,
         });
         this.props.history.push("/login");
+        let response = await postConfirmNewAccount(data);
+        
       }
     } catch (e) {
       console.log(e);

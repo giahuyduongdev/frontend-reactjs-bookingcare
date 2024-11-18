@@ -135,8 +135,8 @@ const RetrievePassword = () => {
         }
       }
     } else {
-      toast.error("New password and confirm new password do not match!");
-    }
+      toast.error("New password and confirm new password do not match!")
+    };
   };
   const classes = useStyles();
   return (

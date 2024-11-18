@@ -12,6 +12,14 @@ const createNewUserService = (data) => {
   return axios.post("/api/create-new-user", data);
 };
 
+const postConfirmNewAccount = (data) => {
+  return axios.post("/api/user-confirm-account", data);
+};
+
+const postConfirmNewAccountEmail = (data) => {
+  return axios.post("/api/user-confirm-account-email", data);
+};
+
 const registerNewUserService = (data) =>{
   return axios.post("/api/register-new-user", data);
 }
@@ -191,4 +199,6 @@ export {
   getTotalNewUserDay,
   getTotalHealthAppointmentDone,
   getTopThreeDoctorOfTheYear,
+  postConfirmNewAccount,
+  postConfirmNewAccountEmail
 };

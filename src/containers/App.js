@@ -17,6 +17,7 @@ import Login from './Auth/Login';
 import Signup from "./Auth/Signup";
 import ForgotPassword from "./Auth/ForgotPassword";
 import RetrievePassword from "./Auth/RetrievePassword";
+import ConfirmNewAccount from './Auth/ConfirmNewAccount.js';
 import System from '../routes/System';
 
 
@@ -60,9 +61,11 @@ class App extends Component {
                                     <Route path={path.SIGNUP} exact component={Signup} />
                                     <Route path={path.FORGOT_PASSWORD} exact component={ForgotPassword}/>
                                     <Route path={path.RETRIEVE_PASSWORD} component={RetrievePassword}/>
+                                    <Route path={path.CONFIRM_NEW_ACCOUNT} component={ConfirmNewAccount}/>
                                     <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
                                     <Route path={path.HOMEPAGE} component={HomePage} />
                                     <Route path={path.DETAIL_DOCTOR} component={DetailDoctor} />
+                                    <Route path="*"><NotFound /></Route>
                                 </Switch>
                             </CustomScrollbars>
                         </div>

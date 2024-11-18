@@ -117,7 +117,6 @@ const cancelBooking = (data) => {
 const postUserForgotPassword = (data) => {
   return axios.post("/api/user-forgot-password", data);
 };
-
 const postVerifyRetrievePassword = (data) => {
   return axios.post("/api/verify-retrieve-password", data);
 };

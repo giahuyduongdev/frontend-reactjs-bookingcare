@@ -5,6 +5,7 @@ export const path = {
     SIGNUP: "/sign-up",
     FORGOT_PASSWORD: "/forgot-password",
     RETRIEVE_PASSWORD: "/retrieve-password",
+    CONFIRM_NEW_ACCOUNT: "/confirm-new-account",
     LOG_OUT: "/logout",
     SYSTEM: "/system",
     DETAIL_DOCTOR: "/detail-doctor/:id",

@@ -9,7 +9,7 @@ import DatePicker from "../../../components/Input/DatePicker";
 import moment from "moment";
 import { toast } from "react-toastify";
 import _ from "lodash";
-import { saveBulkScheduleDoctor } from "../../../services/userService";
+import { saveBulkScheduleDoctor} from "../../../services/userService";
 
 class ManageSchedule extends Component {
   constructor(props) {
@@ -137,6 +137,7 @@ class ManageSchedule extends Component {
   };
   render() {
     let { rangeTime } = this.state;
+    console.log(rangeTime)
     let { language } = this.props;
     let yesterday = new Date(new Date().setDate(new Date().getDate() - 1));
     return (
@@ -171,19 +172,25 @@ class ManageSchedule extends Component {
               {rangeTime &&
                 rangeTime.length > 0 &&
                 rangeTime.map((item, index) => {
-                  return (
-                    <button
-                      className={
-                        item.isSelected === true
-                          ? "btn btn-schedule active"
-                          : "btn btn-schedule"
-                      }
-                      key={index}
-                      onClick={() => this.handleClickBtnTime(item)}
-                    >
-                      {language === LANGUAGES.VI ? item.valueVi : item.valueEn}
-                    </button>
-                  );
+                  // console.log('check time',rangeTime);
+                  // console.log(this.state.selectedDoctor);
+                  // let convertDate = new Date(this.state.currentDate).getTime();
+                  // console.log(convertDate);
+                  // console.log(item.keyMap);
+                  // console.log(this.props)
+                    return(
+                      <button
+                        className={
+                          item.isSelected === true
+                            ? "btn btn-schedule active"
+                            : "btn btn-schedule"
+                        }
+                        key={index}
+                        onClick={() => this.handleClickBtnTime(item)}
+                      >
+                        {language === LANGUAGES.VI ? item.valueVi : item.valueEn}
+                      </button>
+                    );
                 })}
             </div>
             <div className="col-12">

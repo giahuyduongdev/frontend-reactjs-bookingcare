@@ -14,7 +14,7 @@
     "banner": {
       "title1": "MEDICAL PLATFORM",
       "title2": "COMPREHENSIVE HEALTH CARE",
-      "child1": "Specialist Examination",
+      "child1": "Specialist examination",
       "child2": "Remote examination",
       "child3": "General examination",
       "child4": "Medical test",
@@ -60,7 +60,8 @@
     "homepage": {
       "outstanding-doctor": "Last week's featured doctor",
       "more-infor": "More Infor",
-      "specialty-popular": "Popular specialties"
+      "specialty-popular": "Specialties",
+      "clinic-popular" : "Clinics" 
     },
   
     "manage-schedule": {

@@ -4,4 +4,18 @@
       color: #45c3d2;
     }
   }
-
+  
+.clinic-name{
+    cursor: pointer;
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    font-family: Montserrat, sans-serif !important;
+    line-height: 2rem !important;
+}
+.clinic-child{
+  width: 75% !important;
+  border: 2px solid #f1f1f1;
+  border-radius: 1rem;
+  height: 275px;
+  
+}

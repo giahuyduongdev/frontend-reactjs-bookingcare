@@ -31,6 +31,15 @@ import DetailDoctor from "./Patient/Doctor/DetailDoctor";
 // import DetailSpecialty from "./Patient/Specialty/DetailSpecialty";
 // import DetailClinic from "./Patient/Clinic/DetailClinic";
 
+// import ListSpecialty from "./HomePage/SectionList/ListSpecialty";
+// import ListOutStandingDoctor from "./HomePage/SectionList/ListOutStandingDoctor";
+// import ListMedicalFacility from "./HomePage/SectionList/ListMedicalFacility";
+
+// import AdminDashboard from "./AdminDashboard/AdminDashboard";
+// import indexAdminDashboard from "./AdminDashboard/indexAdminDashboard";
+
+// import VerifyEmail from "./Patient/VerifyEmail";
+
 import CustomScrollbars from "../components/CustomScrollbars";
 import { CustomToastCloseButton } from "../components/CustomToast";
 

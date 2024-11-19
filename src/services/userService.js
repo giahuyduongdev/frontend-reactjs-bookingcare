@@ -200,5 +200,5 @@ export {
   getTotalHealthAppointmentDone,
   getTopThreeDoctorOfTheYear,
   postConfirmNewAccount,
-  postConfirmNewAccountEmail
+  postConfirmNewAccountEmail,
 };

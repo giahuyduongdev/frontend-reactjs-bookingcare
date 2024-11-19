@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute !important",
     top: "270px !important",
     left: "630px !important",
+        marginLeft: "-65px !important"
   },
   titleHeader: {
     fontWeight: "600 !important",

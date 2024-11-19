@@ -13,7 +13,7 @@ class About extends Component {
           <div className="content-left">
             <iframe
               width="100%"
-              height="400px"
+              height="300px"
               src="https://www.youtube.com/embed/FyDQljKtWnI"
               title="YouTube video player"
               frameBorder="0"
@@ -22,10 +22,48 @@ class About extends Component {
             ></iframe>
           </div>
           <div className="content-right">
-            <p>
-            BookingCare là Nền tảng Y tế Chăm sóc sức khỏe toàn diện kết nối người dùng đến với dịch vụ y tế - chăm sóc sức khỏe chất lượng, hiệu quả, tin cậy với trên 200 bệnh viện, phòng khám uy tín; trên 1.500 bác sĩ chuyên khoa giỏi và hàng nghìn dịch vụ y tế chất lượng cao. 
-            BookingCare kết nối mạng lưới bác sĩ và cơ sở y tế chuyên khoa. Bệnh nhân dễ dàng lựa chọn đúng dịch vụ y tế với thông tin đã xác thực và đặt lịch nhanh chóng.
-            </p>
+            <div className="content-right container-newspaper">
+              <div className="content-right newspapaer">
+                <a href="https://vnexpress.net/bookingcare-ra-mat-tro-ly-ai-4798819.html" target="_blank">
+                  <img src="https://raw.githubusercontent.com/giahuyduongdev/sharing-host-files-bookingcare/refs/heads/main/about/vnexpress.png">
+                  </img>
+                </a>
+              </div>
+              <div class ="content-right newspapaer2">
+                <a href="https://suckhoedoisong.vn/dat-lich-kham-benh-tiet-kiem-thong-minh-va-hieu-qua-169153232.htm" target="_blank">
+                  <img src="https://raw.githubusercontent.com/giahuyduongdev/sharing-host-files-bookingcare/refs/heads/main/about/suckhoedoisong.png">
+                  </img>
+                </a>
+              </div>
+            </div>
+            <div className="content-right container-newspaper">
+              <div className="content-right newspapaer">
+                <a href="https://vietnamnet.vn/nen-tang-dat-lich-kham-online-bookingcare-muon-tang-truong-nguoi-dung-gap-5-lan-nam-2017-i370270.html" target="_blank">
+                  <img src="https://raw.githubusercontent.com/giahuyduongdev/sharing-host-files-bookingcare/refs/heads/main/about/logo-vnnet.jpg">
+                  </img>
+                </a>
+              </div>
+              <div className="content-right newspapaer2">
+                <a href="https://vtv.vn/video/ca-phe-khoi-nghiep-14-11-2018-334894.htm" target="_blank">
+                  <img src="https://raw.githubusercontent.com/giahuyduongdev/sharing-host-files-bookingcare/refs/heads/main/about/vtv1.png">
+                  </img>
+                </a>
+              </div>
+            </div>
+            <div className="content-right container-newspaper">
+              <div className="content-right newspapaer">
+                <a href="https://vtcnews.vn/dat-kham-chuyen-khoa-va-hanh-trinh-ho-tro-cac-benh-vien-qua-tai-ar434101.html" target="_blank">
+                  <img src="https://raw.githubusercontent.com/giahuyduongdev/sharing-host-files-bookingcare/refs/heads/main/about/vtcnewslogosvg.png">
+                  </img>
+                </a>
+              </div>
+              <div className="content-right newspapaer2">
+                <a href="https://video.vnexpress.net/kham-benh-khong-phai-xep-hang-o-ha-noi-3797126.html" target="_blank">
+                  <img src="https://raw.githubusercontent.com/giahuyduongdev/sharing-host-files-bookingcare/refs/heads/main/about/vnexpress.png">
+                  </img>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>

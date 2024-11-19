@@ -1,11 +1,16 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import "./HomeHeader.scss";
 import { FormattedMessage } from "react-intl";
 import { LANGUAGES } from "../../utils";
 
 import { changeLanguageApp } from "../../store/actions/appActions";
+import { withRouter } from "react-router";
 
+import MenuHomeHeader from "./MenuHomeHeader";
+import HomeMenuSearchSpecialty from "./HomeMenuSearchSpecialty";
+import { emitter } from "../../utils/emitter";
+import { Alert } from "reactstrap";
 
 class HomeHeader extends Component {
   constructor() {
@@ -15,7 +20,6 @@ class HomeHeader extends Component {
       showMenuSearchSpecialty: false,
     };
   }
-
   handleClickShowHomeMenuSearchSpecialty = () => {
     this.setState({
       showMenuSearchSpecialty: !this.state.showMenuSearchSpecialty,
@@ -24,6 +28,7 @@ class HomeHeader extends Component {
 
   changeLanguage = (language) => {
     this.props.changeLanguageAppRedux(language);
+    //fire redux event: action
   };
 
   returnToHome = () => {
@@ -31,23 +36,25 @@ class HomeHeader extends Component {
       this.props.history.push(`/home`);
     }
   };
-
-    render() {
-      let language = this.props.language;
-      return(
+  render() {
+    let language = this.props.language;
+    return (
       <>
         <div className="home-header-container">
           <div className="home-header-content">
             <div className="left-content">
-               <i className="fas fa-bars"></i>
-               <div className="header-logo"
-               onClick={()=>{
-                this.returnToHome();
-               }}
-               >
-               </div>
+              {/* <i className="fas fa-bars"></i> */}
+              <div className="menu-home-header">
+                <MenuHomeHeader />
+              </div>
+              <div
+                className="header-logo"
+                onClick={() => {
+                  this.returnToHome();
+                }}
+              ></div>
             </div>
-            <div className ="center-content">
+            <div className="center-content">
               <div className="child-content">
                 <div>
                   <b>
@@ -59,7 +66,7 @@ class HomeHeader extends Component {
                 </div>
               </div>
               <div className="child-content">
-              <div>
+                <div>
                   <b>
                     <FormattedMessage id="homeheader.health-facility" />
                   </b>
@@ -69,7 +76,7 @@ class HomeHeader extends Component {
                 </div>
               </div>
               <div className="child-content">
-              <div>
+                <div>
                   <b>
                     <FormattedMessage id="homeheader.doctor" />
                   </b>
@@ -79,7 +86,7 @@ class HomeHeader extends Component {
                 </div>
               </div>
               <div className="child-content">
-              <div>
+                <div>
                   <b>
                     <FormattedMessage id="homeheader.fee" />
                   </b>
@@ -89,9 +96,9 @@ class HomeHeader extends Component {
                 </div>
               </div>
             </div>
-            <div className ="right-content">
+            <div className="right-content">
               <div className="support">
-                <i className="fas fa-question-circle"> </i>
+                <i className="fas fa-question-circle"></i>
                 <FormattedMessage id="homeheader.support" />
               </div>
               <div
@@ -120,85 +127,97 @@ class HomeHeader extends Component {
           </div>
         </div>
         {this.props.isShowBanner === true && (
-        <div className="home-header-banner">
-          <div className="content-up">
-            <div className="title1">
-              <FormattedMessage id="banner.title1" />
+          <div className="home-header-banner">
+            <div className="content-up">
+              <div className="title1">
+                <FormattedMessage id="banner.title1" />
+              </div>
+              <div className="title2">
+                <FormattedMessage id="banner.title2" />
+              </div>
+              <div
+                className="search"
+                onClick={() => this.handleClickShowHomeMenuSearchSpecialty()}
+              >
+                <i className="fas fa-search"></i>
+                <FormattedMessage id="banner.search">
+                  {(placeholder) => (
+                    <input type="text" placeholder={language === 'vi' ? "Tìm chuyên khoa khám bệnh" : "Find medical specialty"} />
+                  )}
+                </FormattedMessage>
+
+                {this.state.showMenuSearchSpecialty && (
+                  <HomeMenuSearchSpecialty
+                    showMenuSearchSpecialty={this.state.showMenuSearchSpecialty}
+                  />
+                )}
+              </div>
             </div>
-            <div className ="title2">
-              <FormattedMessage id="banner.title2" />
-            </div>
-            <div className="search">
-              <i className="fas fa-search"></i>
-              <input type="text" placeholder="Tìm chuyên khoa khám bệnh"/>
-            </div>
-            <div>
+            <div className="content-down">
+              <div className="options">
+                <div className="option-child">
+                  <div className="icon-child">
+                    <i className="fas fa-hospital-alt"></i>
+                  </div>
+                  <div className="text-child">
+                    <FormattedMessage id="banner.child1" />
+                  </div>
+                </div>
+                <div className="option-child">
+                  <div className="icon-child">
+                    <i className="fas fa-mobile-alt"></i>
+                  </div>
+                  <div className="text-child">
+                    <FormattedMessage id="banner.child2" />
+                  </div>
+                </div>
+                <div className="option-child">
+                  <div className="icon-child">
+                    <i className="fas fa-procedures"></i>
+                  </div>
+                  <div className="text-child">
+                    <FormattedMessage id="banner.child3" />
+                  </div>
+                </div>
+                <div className="option-child">
+                  <div className="icon-child">
+                    <i className="fas fa-flask"></i>
+                  </div>
+                  <div className="text-child">
+                    <FormattedMessage id="banner.child4" />
+                  </div>
+                </div>
+                <div className="option-child">
+                  <div className="icon-child">
+                    <i className="fas fa-user-md"></i>
+                  </div>
+                  <div className="text-child">
+                    <FormattedMessage id="banner.child5" />
+                  </div>
+                </div>
+                <div className="option-child">
+                  <div className="icon-child">
+                    <i className="fas fa-briefcase-medical"></i>
+                  </div>
+                  <div className="text-child">
+                    <FormattedMessage id="banner.child6" />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          <div className="content-down">
-            <div className="options">
-              <div className="option-child">
-                <div className="icon-child">
-                  <i className="fas fa-hospital-alt"></i>
-                </div>
-                <div className="text-child">
-                  <FormattedMessage id="banner.child1" />
-                </div>
-              </div>
-              <div className="option-child">
-                <div className="icon-child">
-                  <i className="fas fa-mobile-alt"></i>
-                </div>
-                <div className="text-child">
-                  <FormattedMessage id="banner.child2" />
-                </div>
-              </div>
-              <div className="option-child">
-                <div className="icon-child">
-                  <i className="fas fa-procedures"></i>
-                </div>
-                <div className="text-child">
-                  <FormattedMessage id="banner.child3" />
-                </div>
-              </div>
-              <div className="option-child">
-                <div className="icon-child">
-                  <i className="fas fa-flask"></i>
-                </div>
-                <div className="text-child">
-                  <FormattedMessage id="banner.child4" />
-                </div>
-              </div>
-              <div className="option-child">
-                <div className="icon-child">
-                  <i className="fas fa-user-md"></i>
-                </div>
-                <div className="text-child">
-                  <FormattedMessage id="banner.child5" />
-                </div>
-              </div>
-              <div className="option-child">
-                <div className="icon-child">
-                  <i className="fas fa-briefcase-medical"></i>
-                </div>
-                <div className="text-child">
-                  <FormattedMessage id="banner.child6" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
         )}
       </>
     );
   }
 }
 
-const mapStateToProps = state => {
-    return {
-        isLoggedIn: state.user.isLoggedIn,
-        language: state.app.language,
-    };
+const mapStateToProps = (state) => {
+  return {
+    isLoggedIn: state.user.isLoggedIn,
+    userInfo: state.user.userInfo,
+    language: state.app.language,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -207,4 +226,6 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeHeader);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(HomeHeader)
+);

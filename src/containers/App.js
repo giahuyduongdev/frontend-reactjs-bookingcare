@@ -12,20 +12,27 @@ import { path } from '../utils'
 
 import NotFound from "./System/NotFound";
 
-import Home from '../routes/Home';
+
 import Login from './Auth/Login';
 import Signup from "./Auth/Signup";
+
 import ForgotPassword from "./Auth/ForgotPassword";
 import RetrievePassword from "./Auth/RetrievePassword";
 import ConfirmNewAccount from './Auth/ConfirmNewAccount.js';
+
+import Home from '../routes/Home';
 import System from '../routes/System';
+import Doctor from "../routes/Doctor";
 
 
 import HomePage from "./HomePage/HomePage.js";
+
 import DetailDoctor from "./Patient/Doctor/DetailDoctor";
+// import DetailSpecialty from "./Patient/Specialty/DetailSpecialty";
+// import DetailClinic from "./Patient/Clinic/DetailClinic";
 
 import CustomScrollbars from "../components/CustomScrollbars";
-
+import { CustomToastCloseButton } from "../components/CustomToast";
 
 class App extends Component {
     handlePersistorState = () => {
@@ -63,8 +70,10 @@ class App extends Component {
                                     <Route path={path.RETRIEVE_PASSWORD} component={RetrievePassword}/>
                                     <Route path={path.CONFIRM_NEW_ACCOUNT} component={ConfirmNewAccount}/>
                                     <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
+                                    <Route path={"/doctor"} component={userIsAuthenticated(Doctor)}/>
                                     <Route path={path.HOMEPAGE} component={HomePage} />
                                     <Route path={path.DETAIL_DOCTOR} component={DetailDoctor} />
+
                                     <Route path="*"><NotFound /></Route>
                                 </Switch>
                             </CustomScrollbars>

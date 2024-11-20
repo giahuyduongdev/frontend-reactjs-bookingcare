@@ -81,7 +81,7 @@
         "text-address": "ADDRESS's CLINIC",
         "price": "Examination price:",
         "detail": "See details",
-        "payment": "The patient can pay the cost in the form of:",
+        "payment": "Can pay the cost in the form of:",
         "hide-price": "Hide price list"
       },
       "booking-modal": {

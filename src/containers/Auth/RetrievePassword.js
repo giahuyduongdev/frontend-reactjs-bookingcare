@@ -19,12 +19,10 @@ import Button from "@material-ui/core/Button";
 import { postVerifyRetrievePassword } from "../../services/userService";
 import { toast } from "react-toastify";
 
+import './RetrievePassword.scss'
+
 
 const useStyles = makeStyles((theme) => ({
-  retrieveBackground: {
-    background: "#56baed",
-    height: "100vh",
-  },
   container: {
     width: "400px",
     borderRadius: "10px",
@@ -141,7 +139,7 @@ const RetrievePassword = () => {
   const classes = useStyles();
   return (
     <>
-      <div className={classes.retrieveBackground}>
+      <div className="container1">
         <Grid container spacing={1} className={classes.container}>
           <Grid item xs={12}>
             <Typography variant="h4" className={classes.titleRetrieve}>

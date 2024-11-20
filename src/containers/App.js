@@ -32,13 +32,13 @@ import DetailDoctor from "./Patient/Doctor/DetailDoctor";
 // import DetailClinic from "./Patient/Clinic/DetailClinic";
 
 // import ListSpecialty from "./HomePage/SectionList/ListSpecialty";
-// import ListOutStandingDoctor from "./HomePage/SectionList/ListOutStandingDoctor";
+import ListOutStandingDoctor from "./HomePage/SectionList/ListOutStandingDoctor";
 // import ListMedicalFacility from "./HomePage/SectionList/ListMedicalFacility";
 
 // import AdminDashboard from "./AdminDashboard/AdminDashboard";
 // import indexAdminDashboard from "./AdminDashboard/indexAdminDashboard";
 
-// import VerifyEmail from "./Patient/VerifyEmail";
+import VerifyEmail from "./Patient/VerifyEmail";
 
 import CustomScrollbars from "../components/CustomScrollbars";
 import { CustomToastCloseButton } from "../components/CustomToast";
@@ -82,6 +82,8 @@ class App extends Component {
                                     <Route path={"/doctor"} component={userIsAuthenticated(Doctor)}/>
                                     <Route path={path.HOMEPAGE} component={HomePage} />
                                     <Route path={path.DETAIL_DOCTOR} component={DetailDoctor} />
+                                    <Route path={path.LIST_OUSTANDING_DOCTOR} exact component={ListOutStandingDoctor}/>
+                                    <Route path={path.VERIFY_EMAIL_BOOKING} component={VerifyEmail}/>
 
                                     <Route path="*"><NotFound /></Route>
                                 </Switch>

@@ -4,23 +4,32 @@
     margin-bottom: 10px;
     .text-address {
       text-transform: uppercase;
-      color: #333;
+      color: #666666;
+      font-weight: 700;
     }
     .name-clinic {
       padding: 5px 0;
-      font-weight: 600;
+      font-weight: 700;
       color: #333;
+      font-size: 13px;
     }
     .detail-address {
-      font-weight: 600;
+     font-size: 13px;
+     font-weight: 300;
     }
   }
 
   .content-down {
     .short-infor {
+      .pricetext{
+        color: rgba(102, 102, 102, 1);
+        text-transform: uppercase;
+        font-weight: bold;
+      }
       .detail {
         cursor: pointer;
-        color: rgb(38, 160, 231);
+        color: rgba(72, 196, 211, 1);
+        font-size: 14px;
       }
       .currency {
         margin: 0 5px;
@@ -39,19 +48,22 @@
           float: right;
         }
       }
-      .note {
-      }
     }
     .payment {
       border: 1px solid #ddd;
       padding: 5px;
       background-color: #eee;
+      display: flex;
+      .text{
+        margin: 0 5px;
+      }
     }
     .hide-price {
       margin-top: 10px;
       span {
         cursor: pointer;
-        color: rgb(38, 160, 231);
+        color: rgba(72, 196, 211, 1);
+        font-size: 14px;
       }
     }
   }

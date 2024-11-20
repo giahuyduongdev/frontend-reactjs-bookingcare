@@ -67,10 +67,13 @@ class DoctorExtraInfor extends Component {
               : ""}
           </div>
         </div>
+        <hr></hr>
         <div className="content-down">
           {isShowDetailInfor === false && (
             <div className="short-infor">
-              <FormattedMessage id="patient.extra-infor-doctor.price" />
+              <spa className="pricetext">
+                <FormattedMessage id="patient.extra-infor-doctor.price" />
+              </spa>
               {extraInfor &&
                 extraInfor.priceTypeData &&
                 language === LANGUAGES.VI && (
@@ -109,7 +112,7 @@ class DoctorExtraInfor extends Component {
               <div className="detail-infor">
                 <div className="price">
                   <span className="left">
-                    <FormattedMessage id="patient.extra-infor-doctor.price" />
+                      <FormattedMessage id="patient.extra-infor-doctor.price" />
                   </span>
                   <span className="right">
                     {extraInfor &&
@@ -142,7 +145,7 @@ class DoctorExtraInfor extends Component {
               </div>
               <div className="payment">
                 <FormattedMessage id="patient.extra-infor-doctor.payment" />
-                {extraInfor &&
+                <div className="text"> {extraInfor &&
                 extraInfor.paymentTypeData &&
                 language === LANGUAGES.VI
                   ? extraInfor.paymentTypeData.valueVi
@@ -151,7 +154,7 @@ class DoctorExtraInfor extends Component {
                 extraInfor.paymentTypeData &&
                 language === LANGUAGES.EN
                   ? extraInfor.paymentTypeData.valueEn
-                  : ""}
+                  : ""}</div>   
               </div>
               <div className="hide-price">
                 <span onClick={() => this.showHideDetailInfor(false)}>

@@ -35,13 +35,15 @@ import ListSpecialty from "./HomePage/SectionList/ListSpecialty";
 import ListOutStandingDoctor from "./HomePage/SectionList/ListOutStandingDoctor";
 import ListMedicalFacility from "./HomePage/SectionList/ListMedicalFacility";
 
-// import AdminDashboard from "./AdminDashboard/AdminDashboard";
-// import indexAdminDashboard from "./AdminDashboard/indexAdminDashboard";
+import AdminDashboard from "./AdminDashboard/AdminDashboard";
+import indexAdminDashboard from "./AdminDashboard/indexAdminDashboard";
 
 import VerifyEmail from "./Patient/VerifyEmail";
 
 import CustomScrollbars from "../components/CustomScrollbars";
 import { CustomToastCloseButton } from "../components/CustomToast";
+
+import Profile from "./Patient/Profile";
 
 class App extends Component {
     handlePersistorState = () => {
@@ -86,6 +88,8 @@ class App extends Component {
                                     <Route path={path.VERIFY_EMAIL_BOOKING} component={VerifyEmail}/>
                                     <Route path={path.LIST_SPECIALTY} exact component={ListSpecialty}/>
                                     <Route path={path.LIST_MEDICAL_FACILITY} exact component={ListMedicalFacility}/>
+                                    <Route path={path.PROFILE} component={Profile} />
+                                    <Route path={path.ADMIN_DASHBOARD} component={userIsAuthenticated(indexAdminDashboard)}/>
                                     <Route path="*"><NotFound /></Route>
                                 </Switch>
                             </CustomScrollbars>

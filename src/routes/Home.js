@@ -7,7 +7,7 @@ class Home extends Component {
 
     render() {
         const { isLoggedIn, userInfo } = this.props;
-        let linkToRedirect = isLoggedIn && userInfo.roleId !== USER_ROLE.PATIENT ? '/system/user-manage' : '/home';
+        let linkToRedirect = isLoggedIn && userInfo.roleId !== USER_ROLE.PATIENT ?'/admin-dashboard' : '/home';
         return (
             <Redirect to={linkToRedirect} />
         );

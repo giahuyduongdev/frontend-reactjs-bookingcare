@@ -14,7 +14,7 @@ export default function Logo({ sx }) {
     <RouterLink to="/">
       <Box
         component="img"
-        src="/static/logo.svg"
+        src="https://raw.githubusercontent.com/giahuyduongdev/sharing-host-files-bookingcare/refs/heads/main/logo/smart-banner.png"
         sx={{ width: 40, height: 40, ...sx }}
       />
     </RouterLink>

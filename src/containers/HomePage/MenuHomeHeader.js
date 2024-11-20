@@ -99,6 +99,9 @@ const MenuHomeHeader = () => {
       case "sign-up":
         history.push("/sign-up");
         break;
+      case "profile":
+        history.push("/profile");
+        break;   
       default:
       // code block
     }
@@ -165,6 +168,9 @@ const MenuHomeHeader = () => {
         {isLoggedIn && (
           <>
             <StyledMenuItem
+             onClick={() => {
+              handleClickItemMenu("profile");
+            }}
             //  onClick={() => {
             //    handleClickItemMenu("logout");
             //  }}

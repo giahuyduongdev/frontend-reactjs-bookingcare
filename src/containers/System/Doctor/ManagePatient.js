@@ -273,12 +273,12 @@ class ManagePatient extends Component {
                       dataPatient.map((item, index) => {
                         let time =
                           language === LANGUAGES.VI
-                            ? item.timeTypeDataPatient.valueVi
-                            : item.timeTypeDataPatient.valueEn;
+                            ? item.timeTypeDataPatient?.valueVi
+                            : item.timeTypeDataPatient?.valueEn;
                         let gender =
                           language === LANGUAGES.VI
-                            ? item.patientData.genderData.valueVi
-                            : item.patientData.genderData.valueVi;
+                            ? item.patientData.genderData?.valueVi
+                            : item.patientData.genderData?.valueVi;
                         return (
                           <tr key={index}>
                             <td>{index + 1}</td>

@@ -128,6 +128,7 @@ class HomeHeader extends Component {
         </div>
         {this.props.isShowBanner === true && (
           <div className="home-header-banner">
+            <img className="banner" src="https://raw.githubusercontent.com/giahuyduongdev/sharing-host-files-bookingcare/refs/heads/main/public/background/dat-kham-theo-bac-si.jpg"></img>
             <div className="content-up">
               <div className="title1">
                 <FormattedMessage id="banner.title1" />

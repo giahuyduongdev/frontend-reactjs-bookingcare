@@ -31,6 +31,7 @@ import Divider from "@material-ui/core/Divider";
 
 import HomeHeader from "../../HomePage/HomeHeader";
 import HomeFooter from "../../HomePage/HomeFooter"
+
 import './ListOutStandingDoctor.scss'
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -75,6 +76,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ListOutStandingDoctor = () => {
+  const [isShowLoading, setIsShowLoading] = useState("");
   const classes = useStyles();
   const [arrDoctors, setArrDoctors] = useState([]);
 
@@ -82,11 +84,12 @@ const ListOutStandingDoctor = () => {
   const language = useSelector((state) => state.app.language);
 
   const dispatch = useDispatch();
+  
+  useEffect(() => {
+    dispatch(actions.fetchAllDoctors())
+  },[]);
+  useEffect(() => {
 
-  useEffect(() => {
-    dispatch(actions.fetchAllDoctors());
-  }, []);
-  useEffect(() => {
     setArrDoctors(allDoctors);
   }, [allDoctors]);
 

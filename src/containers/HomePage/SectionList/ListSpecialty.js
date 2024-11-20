@@ -27,6 +27,12 @@ import IconButton from "@material-ui/core/IconButton";
 import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
 import Divider from "@material-ui/core/Divider";
 
+
+import HomeHeader from "../../HomePage/HomeHeader";
+import HomeFooter from "../../HomePage/HomeFooter"
+
+import'./ListSpecialty.scss';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     position: "sticky",
@@ -55,8 +61,8 @@ const useStyles = makeStyles((theme) => ({
   //   color: "black",
   // },
   bgImageListSpecialty: {
-    width: "100px",
-    height: "67px",
+    width: "202px",
+    height: "105px",
     backgroundPosition: "center center",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
@@ -92,6 +98,7 @@ const ListSpecialty = () => {
   };
   return (
     <>
+    <HomeHeader isShowBanner={false} />
       <div className={classes.root}>
         <AppBar position="static" className={classes.menu}>
           <Toolbar variant="dense">
@@ -141,6 +148,7 @@ const ListSpecialty = () => {
             })}
         </MenuList>
       </Paper>
+      <HomeFooter />
     </>
   );
 };

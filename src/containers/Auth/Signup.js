@@ -12,6 +12,8 @@ import { handleLoginApi } from "../../services/userService";
 import { registerNewUserService, postConfirmNewAccount } from "../../services/userService";
 
 import { toast } from "react-toastify";
+import BounceLoader from "react-spinners/BounceLoader";
+import LoadingOverlay from "react-loading-overlay";
 
 class Signup extends Component {
   constructor(props) {
@@ -24,6 +26,7 @@ class Signup extends Component {
       address: "",
       isShowPassword: false,
       errMessage: "",
+      isShowLoading: false,
     };
   }
 
@@ -48,12 +51,16 @@ class Signup extends Component {
   };
 
   createNewUser = async (data) => {
+    this.setState({ isShowLoading: true });
     try {
       let response = await registerNewUserService(data);
       if (response && response.errCode !== 0) {
         toast.error(response.errMessage);
+        this.setState({ isShowLoading: false });
       } else {
+        
         toast.success("User created, pls check your email to authenticate your account!");
+        this.setState({ isShowLoading: false });
         this.setState({
           password: "",
           email: "",
@@ -63,7 +70,8 @@ class Signup extends Component {
           isShowPassword: false,
         });
         this.props.history.push("/login");
-        let response = await postConfirmNewAccount(data);
+        await postConfirmNewAccount(data);
+        
         
       }
     } catch (e) {
@@ -96,6 +104,10 @@ class Signup extends Component {
   render() {
     return (
       <div className="login-background">
+              <LoadingOverlay
+        active={this.state.isShowLoading}
+        spinner={<BounceLoader color={"#86e7d4"} size={60} />}
+      ></LoadingOverlay>
         <div className="signup-container">
           <div className="login-content row">
             <div className="col-12 text-login">Sign Up</div>

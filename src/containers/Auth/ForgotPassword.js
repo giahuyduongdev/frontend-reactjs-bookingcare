@@ -5,10 +5,14 @@ import "./ForgotPassword.scss";
 import { postUserForgotPassword } from "../../services/userService";
 import { toast } from "react-toastify";
 
-const ForgotPassword = () => {
-  let history = useHistory();
+import LoadingOverlay from "react-loading-overlay";
+import BounceLoader from "react-spinners/BounceLoader";
 
+
+
+const ForgotPassword = () => {
   const [email, setEmail] = useState("");
+  const [isShowLoading, setIsShowLoading] = useState("");
 
   useEffect(() => {
     document.title = "Forgot Password";
@@ -17,6 +21,7 @@ const ForgotPassword = () => {
   const handleForgotPassword = async () => {
     // alert(email.trim().length);
     // alert(email.length);
+    setIsShowLoading(true);
     if (email.trim().length === 0) {
       toast.error("Email input empty!");
       return;
@@ -26,12 +31,18 @@ const ForgotPassword = () => {
     });
     if (res && res.errCode === 0) {
       toast.success("Send email to retrieve password succeed!");
+      setIsShowLoading(false);
     } else {
       toast.error("User's not found, please retype email!");
+      setIsShowLoading(false);
     }
   };
   return (
     <>
+          <LoadingOverlay
+        active={isShowLoading}
+        spinner={<BounceLoader color={"#86e7d4"} size={60} />}
+      ></LoadingOverlay>
       <div className="login-background">
         <div className="forgot-password-container">
           <div className="login-content row">

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Redirect, Route, Switch } from "react-router-dom";
 import Header from "../containers/Header/Header";
 import ManageScheduleOneDoctor from "../containers/System/Doctor/ManageScheduleOneDoctor";
-// import ManagePatient from "../containers/System/Doctor/ManagePatient";
+import ManagePatient from "../containers/System/Doctor/ManagePatient";
 
 class Doctor extends Component {
   render() {
@@ -18,7 +18,7 @@ class Doctor extends Component {
               <Route
                 path="/doctor/manage-schedule"
                 component={ManageScheduleOneDoctor}></Route> 
-              {/* <Route path="/doctor/manage-patient" component={ManagePatient} /> */}
+              <Route path="/doctor/manage-patient" component={ManagePatient} />
             </Switch>
           </div>
         </div>

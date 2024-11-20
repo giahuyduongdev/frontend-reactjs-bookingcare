@@ -91,7 +91,13 @@
 }
 
 .home-header-banner {
-  background-image: url("https://raw.githubusercontent.com/giahuyduongdev/sharing-host-files-bookingcare/refs/heads/main/public/background/header-background-2.webp");
+  .banner{
+    position: absolute;
+    width: 30%;
+    margin-left: 1000px;
+    margin-top: 20px;
+  }
+  background-image: url("https://raw.githubusercontent.com/giahuyduongdev/sharing-host-files-bookingcare/refs/heads/main/public/background/banner.png");
   height: 470px;
   background-repeat: no-repeat;
   background-size: cover;
@@ -153,7 +159,7 @@
       rgba(255, 255, 255, 0.9),
       rgba(255, 255, 255, 1)
     );
-    padding-bottom: 130px;
+    padding-bottom: 20px;
     .options {
       text-align: center;
       display: flex;

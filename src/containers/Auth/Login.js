@@ -8,6 +8,7 @@ import "./Login.scss";
 import { FormattedMessage } from "react-intl";
 import { handleLoginApi } from "../../services/userService";
 // import { userLoginSuccess } from "../../store/actions";
+import { toast } from "react-toastify";
 
 class Login extends Component {
   constructor(props) {
@@ -39,8 +40,10 @@ class Login extends Component {
         this.setState({
           errMessage: data.message,
         });
+        toast.error(this.state.errMessage);
       }
       if (data && data.errCode === 0) {
+        toast.success("Login successfully!");
         this.props.userLoginSuccess(data.user);
       }
     } catch (error) {
@@ -49,6 +52,7 @@ class Login extends Component {
           this.setState({
             errMessage: error.response.data.message,
           });
+          toast.error(this.state.errMessage);
         }
       }
     }
@@ -105,9 +109,9 @@ class Login extends Component {
                 </span>
               </div>
             </div>
-            <div className="col-12" style={{ color: "red" }}>
+            {/* <div className="col-12" style={{ color: "red" }}>
               {this.state.errMessage}
-            </div>
+            </div> */}
             <div className="col-12">
               <button
                 className="btn-login"

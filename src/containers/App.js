@@ -28,8 +28,8 @@ import Doctor from "../routes/Doctor";
 import HomePage from "./HomePage/HomePage.js";
 
 import DetailDoctor from "./Patient/Doctor/DetailDoctor";
-// import DetailSpecialty from "./Patient/Specialty/DetailSpecialty";
-// import DetailClinic from "./Patient/Clinic/DetailClinic";
+import DetailSpecialty from "./Patient/Specialty/DetailSpecialty";
+import DetailClinic from "./Patient/Clinic/DetailClinic";
 
 import ListSpecialty from "./HomePage/SectionList/ListSpecialty";
 import ListOutStandingDoctor from "./HomePage/SectionList/ListOutStandingDoctor";
@@ -75,21 +75,33 @@ class App extends Component {
                             <CustomScrollbars style={{ height: "100vh", width: "100%" }}>
                                 <Switch>
                                     <Route path={path.HOME} exact component={(Home)} />
+
                                     <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
                                     <Route path={path.SIGNUP} exact component={Signup} />
                                     <Route path={path.FORGOT_PASSWORD} exact component={ForgotPassword}/>
                                     <Route path={path.RETRIEVE_PASSWORD} component={RetrievePassword}/>
                                     <Route path={path.CONFIRM_NEW_ACCOUNT} component={ConfirmNewAccount}/>
+
                                     <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
+                                    <Route path={path.ADMIN_DASHBOARD} component={userIsAuthenticated(indexAdminDashboard)}/>
                                     <Route path={"/doctor"} component={userIsAuthenticated(Doctor)}/>
+
                                     <Route path={path.HOMEPAGE} component={HomePage} />
+
+                                    <Route path={path.DETAIL_SPECIALTY} component={DetailSpecialty} />
+                                    <Route path={path.LIST_SPECIALTY} exact component={ListSpecialty}/>
+
+                                    <Route path={path.DETAIL_CLINIC} component={DetailClinic} />
+                                    <Route path={path.LIST_MEDICAL_FACILITY} exact component={ListMedicalFacility}/>
+                                    
+
                                     <Route path={path.DETAIL_DOCTOR} component={DetailDoctor} />
                                     <Route path={path.LIST_OUSTANDING_DOCTOR} exact component={ListOutStandingDoctor}/>
+
                                     <Route path={path.VERIFY_EMAIL_BOOKING} component={VerifyEmail}/>
-                                    <Route path={path.LIST_SPECIALTY} exact component={ListSpecialty}/>
-                                    <Route path={path.LIST_MEDICAL_FACILITY} exact component={ListMedicalFacility}/>
+
                                     <Route path={path.PROFILE} component={Profile} />
-                                    <Route path={path.ADMIN_DASHBOARD} component={userIsAuthenticated(indexAdminDashboard)}/>
+                                    
                                     <Route path="*"><NotFound /></Route>
                                 </Switch>
                             </CustomScrollbars>

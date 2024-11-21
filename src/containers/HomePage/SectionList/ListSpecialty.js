@@ -96,6 +96,8 @@ const ListSpecialty = () => {
   const handleOnClickBackHome = () => (event) => {
     history.push(`/home`);
   };
+
+  console.log(dataSpecialty);
   return (
     <>
     <HomeHeader isShowBanner={false} />

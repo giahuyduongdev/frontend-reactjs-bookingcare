@@ -1,12 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { FormattedMessage } from "react-intl";
 import "./CreateImageRemedyModal.scss";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
 
-import { toast } from "react-toastify";
-import moment from "moment";
-import localization from "moment/locale/vi"; //su dung chung cho cai mac dinh la tieng viet
+
 import { CommonUtils } from "../../../utils";
 
 class CreateImageRemedyModal extends Component {

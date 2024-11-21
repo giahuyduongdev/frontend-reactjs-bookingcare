@@ -9,13 +9,10 @@ import { withRouter } from "react-router";
 
 import MenuHomeHeader from "./MenuHomeHeader";
 import HomeMenuSearchSpecialty from "./HomeMenuSearchSpecialty";
-import { emitter } from "../../utils/emitter";
-import { Alert } from "reactstrap";
 
 class HomeHeader extends Component {
   constructor() {
     super();
-
     this.state = {
       showMenuSearchSpecialty: false,
     };
@@ -36,6 +33,26 @@ class HomeHeader extends Component {
       this.props.history.push(`/home`);
     }
   };
+  returnToSpecialty = () => {
+    if (this.props.history) {
+        this.props.history.push(`/list-specialty`);
+    }
+  };
+  returnToMedicalSpecialty = () => {
+    if (this.props.history) {
+        this.props.history.push(`/list-medical-facility`);
+    }
+  };
+  returnToDoctor = () => {
+    if (this.props.history) {
+        this.props.history.push(`/list-oustanding-doctor`);
+    }
+  };
+  returnToHealthFee = () => {
+    if (this.props.history) {
+        this.props.history.push(`/update-later`);
+    }
+  };
   render() {
     let language = this.props.language;
     return (
@@ -50,13 +67,15 @@ class HomeHeader extends Component {
               <div
                 className="header-logo"
                 onClick={() => {
-                  this.returnToHome();
+                  this.returnToHome()
                 }}
               ></div>
             </div>
             <div className="center-content">
-              <div className="child-content">
-                <div>
+              <div className="child-content" onClick={() => {
+                  this.returnToSpecialty()
+                }}>
+                <div> 
                   <b>
                     <FormattedMessage id="homeheader.speciality" />
                   </b>
@@ -65,7 +84,7 @@ class HomeHeader extends Component {
                   <FormattedMessage id="homeheader.searchdoctor" />
                 </div>
               </div>
-              <div className="child-content">
+              <div className="child-content" onClick={()=>{this.returnToMedicalSpecialty()}}>
                 <div>
                   <b>
                     <FormattedMessage id="homeheader.health-facility" />
@@ -75,7 +94,7 @@ class HomeHeader extends Component {
                   <FormattedMessage id="homeheader.select-room" />
                 </div>
               </div>
-              <div className="child-content">
+              <div className="child-content" onClick={() =>{this.returnToDoctor()}}>
                 <div>
                   <b>
                     <FormattedMessage id="homeheader.doctor" />
@@ -85,7 +104,7 @@ class HomeHeader extends Component {
                   <FormattedMessage id="homeheader.select-doctor" />
                 </div>
               </div>
-              <div className="child-content">
+              <div className="child-content" onClick={() =>{this.returnToHealthFee()}}>
                 <div>
                   <b>
                     <FormattedMessage id="homeheader.fee" />

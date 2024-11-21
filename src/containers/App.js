@@ -82,9 +82,9 @@ class App extends Component {
                                     <Route path={path.RETRIEVE_PASSWORD} component={RetrievePassword}/>
                                     <Route path={path.CONFIRM_NEW_ACCOUNT} component={ConfirmNewAccount}/>
 
-                                    <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
+                                    {/* <Route path={path.SYSTEM} component={userIsAuthenticated(System)} /> */}
                                     <Route path={path.ADMIN_DASHBOARD} component={userIsAuthenticated(indexAdminDashboard)}/>
-                                    <Route path={"/doctor"} component={userIsAuthenticated(Doctor)}/>
+                                    {/* <Route path={"/doctor"} component={userIsAuthenticated(Doctor)}/> */}
 
                                     <Route path={path.HOMEPAGE} component={HomePage} />
 

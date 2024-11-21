@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import "./NotFound.scss";
 
@@ -10,7 +10,7 @@ const NotFound = () => {
   }, []);
 
   const handleClickBtn = () => {
-    history.push("/");
+    history.push("/home");
   };
   return (
     <>

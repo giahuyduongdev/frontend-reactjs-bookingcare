@@ -32,7 +32,7 @@ AuthLayout.propTypes = {
 export default function AuthLayout({ children }) {
   return (
     <HeaderStyle>
-      <Logo />
+      {/* <Logo /> */}
 
       <Typography
         variant="body2"

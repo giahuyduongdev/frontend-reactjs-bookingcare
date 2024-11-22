@@ -7,6 +7,8 @@ import { getDetailInforDoctor } from "../../../services/userService";
 import { LANGUAGES } from "../../../utils";
 import DoctorSchedule from "./DoctorSchedule";
 import DoctorExtraInfor from "./DoctorExtraInfor";
+import BounceLoader from "react-spinners/BounceLoader";
+import LoadingOverlay from "react-loading-overlay";
 class DetailDoctor extends Component {
   constructor(props) {
 
@@ -14,10 +16,12 @@ class DetailDoctor extends Component {
     this.state = {
       detailDoctor: {},
       currentDoctorId: -1,
+      isShowLoading: false,
     };
   }
 
   async componentDidMount() {
+    this.setState({ isShowLoading: true });
     if (
       this.props.match &&
       this.props.match.params &&
@@ -35,6 +39,7 @@ class DetailDoctor extends Component {
       }
       //   imageBase64 = new Buffer(user.image, "base64").toString("binary");
     }
+    this.setState({ isShowLoading: false });
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {}
@@ -51,6 +56,10 @@ class DetailDoctor extends Component {
 
     return (
       <>
+       <LoadingOverlay
+        active={this.state.isShowLoading}
+        spinner={<BounceLoader color={"#86e7d4"} size={60} />}
+      ></LoadingOverlay>
         <HomeHeader isShowBanner={false} />
         <div className="doctor-detail-container">
           <div className="intro-doctor">

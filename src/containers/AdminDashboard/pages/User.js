@@ -245,7 +245,7 @@ export default function User() {
   };
 
   return (
-    <Page title="User | Minimal-UI">
+    <Page title="User | BookingCare">
       <Container>
         <Stack
           direction="row"

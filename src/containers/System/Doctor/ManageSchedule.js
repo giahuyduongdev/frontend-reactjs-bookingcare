@@ -92,7 +92,7 @@ class ManageSchedule extends Component {
             timeSchedule= item.valueVi.slice(0,2)
           } 
 
-          if(timeSchedule >= now)
+          if(timeSchedule >= now || this.state.currentDate > new Date())
           {
             item.isSelected = !item.isSelected;
           }

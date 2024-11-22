@@ -17,7 +17,7 @@ const NotFound = () => {
       <div className="error404">
         <div className="error-img"></div>
         <div className="error-content">
-          <h3>Xin lỗi, chúng tôi không tìm thấy trang mà bạn cần!</h3>
+          <h3>Chức năng đang được hoàn thiện!</h3>
           <div class="list-contact">
             <div class="itemct">
               <button className="btn btn-primary" onClick={handleClickBtn}>

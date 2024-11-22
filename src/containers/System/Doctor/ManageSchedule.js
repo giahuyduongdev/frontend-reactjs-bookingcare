@@ -7,7 +7,7 @@ import * as actions from "../../../store/actions";
 import { LANGUAGES} from "../../../utils";
 import DatePicker from "../../../components/Input/DatePicker";
 import { toast } from "react-toastify";
-import _ from "lodash";
+import _, { isNumber } from "lodash";
 import { saveBulkScheduleDoctor} from "../../../services/userService";
 
 class ManageSchedule extends Component {
@@ -78,11 +78,28 @@ class ManageSchedule extends Component {
   };
 
   handleClickBtnTime = (time) => {
+    let now = new Date().getHours();
+    let timeSchedule ='';
     let { rangeTime } = this.state;
     if (rangeTime && rangeTime.length > 0) {
       rangeTime = rangeTime.map((item) => {
-        if (item.id === time.id) item.isSelected = !item.isSelected;
+        if (item.id === time.id){
+          if(item.valueVi[1] === ':')
+          {
+            timeSchedule= item.valueVi[0];
+          }
+          else{
+            timeSchedule= item.valueVi.slice(0,2)
+          } 
 
+          if(timeSchedule >= now)
+          {
+            item.isSelected = !item.isSelected;
+          }
+          else{
+            toast.error("Time has passed!");
+          }
+        }
         return item;
       });
       this.setState({
@@ -90,6 +107,11 @@ class ManageSchedule extends Component {
       });
     }
   };
+
+  803
+
+
+  
 
   handleSaveSchedule = async () => {
     let { rangeTime, selectedDoctor, currentDate } = this.state;
@@ -105,7 +127,6 @@ class ManageSchedule extends Component {
 
     // let formatedDate = moment(currentDate).format(dateFormat.SEND_TO_SERVER);
     let formatedDate = new Date(currentDate).getTime();
-
     if (rangeTime && rangeTime.length > 0) {
       let selectedTime = rangeTime.filter((item) => item.isSelected === true);
       if (selectedTime && selectedTime.length > 0) {

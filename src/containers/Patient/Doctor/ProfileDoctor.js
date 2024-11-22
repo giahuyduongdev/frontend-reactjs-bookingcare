@@ -166,4 +166,4 @@ const mapDispatchToProps = (dispatch) => {
   return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileDoctor);
+ export default connect(mapStateToProps, mapDispatchToProps)(ProfileDoctor);

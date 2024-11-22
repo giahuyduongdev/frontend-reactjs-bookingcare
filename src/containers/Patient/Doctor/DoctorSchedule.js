@@ -108,6 +108,20 @@ class DoctorSchedule extends Component {
         this.props.doctorIdFromParent,
         allDays[0].value
       );
+      let now = new Date().getHours();
+      let value = '';
+      for (var i = res.data.length - 1; i >= 0; i--) {
+        if(res.data[i].timeTypeData.valueVi[2] === ':'){
+          value = res.data[i].timeTypeData.valueVi.slice(0,2);
+        }
+        else{
+          value = res.data[i].timeTypeData.valueVi[0];
+        }
+        
+        if(res.data[i].date == allDays[0].value &&  now > value){
+          res.data.splice(i, 1);
+        }
+      }
       this.setState({
         allAvailableTime: res.data ? res.data : [],
       });
@@ -120,7 +134,33 @@ class DoctorSchedule extends Component {
       let date = event.target.value;
       let res = await getScheduleDoctorByDate(doctorId, date);
 
+      let allDays = this.getArrDays(this.props.language);
+      {allDays &&
+        allDays.length > 0 &&
+        allDays.map((item, index) => {
+          return (
+            console.log(item)
+          );
+        })}
+
+
+      let now = new Date().getHours();
+      let value = '';
+
+      console.log(res)
       if (res && res.errCode === 0) {
+        for (var i = res.data.length - 1; i >= 0; i--) {
+          if(res.data[i].timeTypeData.valueVi[2] === ':'){
+            value = res.data[i].timeTypeData.valueVi.slice(0,2);
+          }
+          else{
+            value = res.data[i].timeTypeData.valueVi[0];
+          }
+          
+          if(res.data[i].date == allDays[0].value &&  now > value){
+            res.data.splice(i, 1);
+          }
+        }
         this.setState({
           allAvailableTime: res.data ? res.data : [],
         });

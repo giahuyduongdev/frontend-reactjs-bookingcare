@@ -90,10 +90,28 @@ class ManageScheduleOneDoctor extends Component {
   };
 
   handleClickBtnTime = (time) => {
+    let now = new Date().getHours();
+    let timeSchedule ='';
     let { rangeTime } = this.state;
     if (rangeTime && rangeTime.length > 0) {
       rangeTime = rangeTime.map((item) => {
-        if (item.id === time.id) item.isSelected = !item.isSelected;
+        if (item.id === time.id){
+          if(item.valueVi[1] === ':')
+            {
+              timeSchedule= item.valueVi[0];
+            }
+            else{
+              timeSchedule= item.valueVi.slice(0,2)
+            } 
+  
+            if(timeSchedule >= now || this.state.currentDate > new Date())
+            {
+              item.isSelected = !item.isSelected;
+            }
+            else{
+              toast.error("Time has passed!");
+            }
+        }
 
         return item;
       });
@@ -117,7 +135,6 @@ class ManageScheduleOneDoctor extends Component {
 
     // let formatedDate = moment(currentDate).format(dateFormat.SEND_TO_SERVER);
     let formatedDate = new Date(currentDate).getTime();
-
     if (rangeTime && rangeTime.length > 0) {
       let selectedTime = rangeTime.filter((item) => item.isSelected === true);
       if (selectedTime && selectedTime.length > 0) {
@@ -148,6 +165,7 @@ class ManageScheduleOneDoctor extends Component {
   };
   render() {
     let { rangeTime } = this.state;
+    console.log(rangeTime);
     let { language } = this.props;
     let yesterday = new Date(new Date().setDate(new Date().getDate() - 1));
     return (

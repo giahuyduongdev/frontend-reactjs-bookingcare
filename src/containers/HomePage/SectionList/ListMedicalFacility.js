@@ -40,10 +40,6 @@ const useStyles = makeStyles((theme) => ({
     top: "0px",
     zIndex: "100",
   },
-  root2: {
-    width: "100wh",
-    height: "100vh",
-  },
   menu: {
     backgroundColor: "#ffffff !important",
   },
@@ -72,6 +68,10 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "10px",
     fontSize: "14px",
     color: "#333",
+  },
+  content: {
+    display: "flex",
+    flexDirection: "column",
   },
 }));
 
@@ -133,12 +133,14 @@ const ListMedicalFacility = () => {
                         }}
                       ></div>
                     </ListItemIcon>
-                    <Typography
-                      variant="inherit"
-                      className={classes.listSpecialtyName}
-                    >
-                      {item.name}
-                    </Typography>
+                    <div className={classes.content}>
+                      <Typography
+                        variant="inherit"
+                        className={classes.listSpecialtyName}
+                      >
+                        {item.name}
+                      </Typography>
+                    </div>
                   </MenuItem>
                   <Divider />
                 </div>

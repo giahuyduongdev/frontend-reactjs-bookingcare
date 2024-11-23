@@ -6,6 +6,7 @@ import DoctorExtraInfor from "../Doctor/DoctorExtraInfor";
 import ProfileDoctor from "../Doctor/ProfileDoctor";
 
 import HomeHeader from "../../HomePage/HomeHeader";
+import HomeFooter from "../../HomePage/HomeFooter";
 import {
   getAllSpecialtyById,
   getAllCodeService,
@@ -135,11 +136,14 @@ class DetailSpecialty extends Component {
               {listProvince &&
                 listProvince.length > 0 &&
                 listProvince.map((item, index) => {
+                  if(item.keyMap === 'ALL' || item.keyMap === 'PRO1' || item.keyMap === 'PRO2')
+                  {
                   return (
                     <option key={index} value={item.keyMap}>
                       {language === LANGUAGES.VI ? item.valueVi : item.valueEn}
                     </option>
                   );
+                }
                 })}
             </select>
           </div>
@@ -171,6 +175,7 @@ class DetailSpecialty extends Component {
               );
             })}
         </div>
+        <HomeFooter />
       </div>
     );
   }

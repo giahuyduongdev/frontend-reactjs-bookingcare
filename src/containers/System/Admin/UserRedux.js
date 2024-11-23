@@ -9,6 +9,9 @@ import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css"; // This only needs to be imported once in your app
 
 import TableManageUser from "./TableManageUser";
+import LoadingOverlay from "react-loading-overlay";
+import BounceLoader from "react-spinners/BounceLoader";
+import { toast } from "react-toastify";
 
 class UserRedux extends Component {
   constructor(props) {
@@ -33,6 +36,7 @@ class UserRedux extends Component {
 
       action: "",
       userEditId: "",
+      isShowLoading: false,
     };
   }
 
@@ -165,7 +169,7 @@ class UserRedux extends Component {
     for (let i = 0; i < arrCheck.length; i++) {
       if (!this.state[arrCheck[i]]) {
         isValid = false;
-        alert("This input is required: " + arrCheck[i]);
+        toast.error("This input is required: " + arrCheck[i]);
         break;
       }
     }
@@ -225,10 +229,14 @@ class UserRedux extends Component {
     } = this.state;
     return (
       <div className="user-redux-container">
+        <LoadingOverlay
+        active={this.state.isShowLoading}
+        spinner={<BounceLoader color={"#86e7d4"} size={60} />}
+        ></LoadingOverlay>
         <div className="title">
           <FormattedMessage id="manage-user.title" />
         </div>
-        <div>{isGetGenders === true ? "Loading genders" : ""}</div>
+        <div>{isGetGenders === true ? <LoadingOverlay active={true} spinner={<BounceLoader color={"#86e7d4"} size={60} />}></LoadingOverlay> : ""}</div>
         <div className="user-redux-body">
           <div className="container">
             <div className="row">

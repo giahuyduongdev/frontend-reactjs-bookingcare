@@ -365,6 +365,7 @@ class ManagePatient extends Component {
                       <th>Địa chỉ</th>
                       <th>Số điện thoại</th>
                       <th>Giới tính</th>
+                      <th>Năm sinh</th>
                       <th>Actions</th>
                       <th>Trạng thái</th>
                     </tr>
@@ -378,6 +379,12 @@ class ManagePatient extends Component {
                           language === LANGUAGES.VI
                             ? item.patientData.genderData?.valueVi
                             : item.patientData.genderData?.valueVi;
+
+                        let date = new Date (item.patientData.birthday).getDate()
+                        let month = new Date (item.patientData.birthday).getMonth()+1
+                        let year = new Date (item.patientData.birthday).getFullYear()
+                        
+
                         return (
                           <tr key={index}>
                             <td>{index + 1}</td>
@@ -390,6 +397,7 @@ class ManagePatient extends Component {
                                 : ""}
                             </td>
                             <td>{gender}</td>
+                            <td>{`${date}/${month}/${year}`}</td>
                             <td>
                               <button
                                 className="mp-btn-confirm"

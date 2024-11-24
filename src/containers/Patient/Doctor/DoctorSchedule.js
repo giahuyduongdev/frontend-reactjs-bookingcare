@@ -37,6 +37,20 @@ class DoctorSchedule extends Component {
         this.props.doctorIdFromParent,
         allDays[0].value
       );
+      let now = new Date().getHours();
+      let value = '';
+      for (var i = res.data.length - 1; i >= 0; i--) {
+        if(res.data[i].timeTypeData.valueVi[2] === ':'){
+          value = res.data[i].timeTypeData.valueVi.slice(0,2);
+        }
+        else{
+          value = res.data[i].timeTypeData.valueVi[0];
+        }
+        
+        if(res.data[i].date == allDays[0].value &&  now > value){
+          res.data.splice(i, 1);
+        }
+      }
       this.setState({
         allAvailableTime: res.data ? res.data : [],
       });

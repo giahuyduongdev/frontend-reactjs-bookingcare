@@ -8,6 +8,7 @@ import {
   getAllPatientForDoctor,
   postSendRemedy,
   postCreateRemedy,
+  cancelBookingEmail
 } from "../../../services/userService";
 import moment from "moment";
 import { LANGUAGES } from "../../../utils";
@@ -24,6 +25,7 @@ class ManagePatient extends Component {
       currentDate: moment(new Date()).startOf("day").valueOf(),
       dataPatient: [],
       isOpenRemedyModal: false,
+      isOpenCancelModal: false,
       isOpenCreateImageRemedyModal: false,
       dataModal: {},
       dataModalCreateRemedy: {},
@@ -71,76 +73,171 @@ class ManagePatient extends Component {
     );
   };
   handleBtnConfirm = (item) => {
-    let data = {
-      doctorId: item.doctorId,
-      patientId: item.patientId,
-      email: item.patientData.email,
-      timeType: item.timeType,
-      patientName: item.patientData.firstName,
-      imageRemedy: item.imageRemedy,
-      token: item.token,
-    };
-    this.setState({
-      isOpenRemedyModal: true,
-      dataModal: data,
-    });
+    if(item.statusId === 'S2'){
+      let data = {
+        doctorId: item.doctorId,
+        patientId: item.patientId,
+        email: item.patientData.email,
+        timeType: item.timeType,
+        patientName: item.patientData.firstName,
+        imageRemedy: item.imageRemedy,
+        token: item.token,
+      };
+      this.setState({
+        isOpenRemedyModal: true,
+        dataModal: data,
+      });
+    }
+    else{
+      if(item.statusId === 'S1')
+        {
+          this.setState({
+            isOpenCreateImageRemedyModal: false,
+          });
+          toast.error("Lịch hẹn chưa được xác nhận...!");
+        }
+        if(item.statusId === 'S3')
+          {
+            this.setState({
+              isOpenCreateImageRemedyModal: false,
+            });
+            toast.error("Lịch hẹn đã được hoàn thành...!");
+          }
+        if(item.statusId === 'S4')
+          {
+            this.setState({
+              isOpenCreateImageRemedyModal: false,
+            });
+            toast.error("Lịch hẹn đã bị hủy...!");
+          }
+  
+    }
   };
   handleBtnCreateRemedy = (item) => {
-    let name = null;
-    if (
-      this.props.user &&
-      this.props.user.firstName &&
-      this.props.user.lastName
-    ) {
-      name = `${this.props.user.lastName} ${this.props.user.firstName}`;
+    if(item.statusId === 'S2'){
+      let name = null;
+      if (
+        this.props.user &&
+        this.props.user.firstName &&
+        this.props.user.lastName
+      ) {
+        name = `${this.props.user.lastName} ${this.props.user.firstName}`;
+      }
+      if (
+        this.props.user &&
+        this.props.user.firstName &&
+        this.props.user.lastName === null
+      ) {
+        name = `${this.props.user.firstName}`;
+      }
+      if (
+        this.props.user &&
+        this.props.user.firstName === null &&
+        this.props.user.lastName
+      ) {
+        name = `${this.props.user.lastName}`;
+      }
+      let data = {
+        doctorId: item.doctorId,
+        patientId: item.patientId,
+        email: item.patientData.email,
+        date: item.date,
+        token: item.token,
+        timeType: item.timeType,
+        patientName: item.patientData.firstName,
+        doctorName: name,
+      };
+      this.setState({
+        isOpenCreateImageRemedyModal: true,
+        dataModalCreateRemedy: data,
+      });
     }
-    if (
-      this.props.user &&
-      this.props.user.firstName &&
-      this.props.user.lastName === null
-    ) {
-      name = `${this.props.user.firstName}`;
+    else{
+      if(item.statusId === 'S1')
+      {
+        this.setState({
+          isOpenCreateImageRemedyModal: false,
+        });
+        toast.error("Lịch hẹn chưa được xác nhận...!");
+      }
+      if(item.statusId === 'S3')
+        {
+          this.setState({
+            isOpenCreateImageRemedyModal: false,
+          });
+          toast.error("Lịch hẹn đã được hoàn thành...!");
+        }
+      if(item.statusId === 'S4')
+        {
+          this.setState({
+            isOpenCreateImageRemedyModal: false,
+          });
+          toast.error("Lịch hẹn đã bị hủy...!");
+        }
+
+     
     }
-    if (
-      this.props.user &&
-      this.props.user.firstName === null &&
-      this.props.user.lastName
-    ) {
-      name = `${this.props.user.lastName}`;
-    }
-    let data = {
-      doctorId: item.doctorId,
-      patientId: item.patientId,
-      email: item.patientData.email,
-      date: item.date,
-      token: item.token,
-      timeType: item.timeType,
-      patientName: item.patientData.firstName,
-      doctorName: name,
-    };
-    this.setState({
-      isOpenCreateImageRemedyModal: true,
-      dataModalCreateRemedy: data,
-    });
+
   };
 
   handleBtnCancel = async (item) => {
     this.setState({ isShowLoading: true });
-    let res = await cancelBooking({
-      doctorId: item.doctorId,
-      patientId: item.patientId,
-      timeType: item.timeType,
-      date: item.date,
-      statusId: item.statusId,
-    });
-    if (res && res.errCode === 0) {
-      this.setState({ isShowLoading: false });
-      toast.success("cancel appointment succeed!");
-      await this.getDataPatient();
-    } else {
-      this.setState({ isShowLoading: true });
-      toast.error("Something wrongs...!");
+    let checkTime =''
+    let note = 'Bác sĩ bận đột xuất';
+    if(item.timeTypeDataPatient.valueVi.length-1 === 10){
+      checkTime = item.timeTypeDataPatient.valueVi[7]
     }
+    if(item.timeTypeDataPatient.valueVi.length-1 === 11){   
+      checkTime = item.timeTypeDataPatient.valueVi.slice(7,9)  
+    }
+    if(item.timeTypeDataPatient.valueVi.length-1 === 12){
+      checkTime = item.timeTypeDataPatient.valueVi.slice(8,10)
+    }
+
+    console.log(new Date().getHours())
+    console.log(new Date().getMinutes()) 
+    if(new Date().getHours() > checkTime){
+      note = 'Bệnh nhân không có mặt'
+    }
+    if(new Date().getHours() == checkTime && new Date().getMinutes() > 0){
+      note = 'Bệnh nhân không có mặt'
+    }
+    if(item.statusId === 'S2'){
+      let res = await cancelBookingEmail({
+        doctorId: item.doctorId,
+        patientId: item.patientId,
+        timeType: item.timeType,
+        date: item.date,
+        note: note,
+        time: item.timeTypeDataPatient.valueVi,
+        dateString: new Date(this.state.currentDate).getDate(),
+        month: new Date(this.state.currentDate).getMonth(),
+        year: new Date(this.state.currentDate).getFullYear(),
+      });
+      if (res && res.errCode === 0) {
+        this.setState({ isShowLoading: false });
+        toast.success("Cancel appointment succeed!");
+        await this.getDataPatient();
+      } else {
+        this.setState({ isShowLoading: false });
+        toast.error("Something wrongs...!");
+      }
+    }
+    else{
+      if(item.statusId === 'S1'){
+      this.setState({ isShowLoading: false });
+      toast.error("Lịch hẹn chưa được khách hàng xác nhận...!");
+      }
+      if(item.statusId === 'S3'){
+        this.setState({ isShowLoading: false });
+        toast.error("Lịch hẹn đã được hoàn thành...!");
+      }
+      if(item.statusId === 'S4'){
+        this.setState({ isShowLoading: false });
+        toast.error("Lịch hẹn đã hủy...!");
+      }
+      }
+   
   };
 
   closeRemedyModal = () => {
@@ -177,6 +274,8 @@ class ManagePatient extends Component {
     ) {
       specialtyIdData = this.props.user.Doctor_Infor.specialtyId;
     }
+
+
 
     let res = await postSendRemedy({
       email: dataChild.email,
@@ -239,7 +338,6 @@ class ManagePatient extends Component {
       dataModalCreateRemedy,
     } = this.state;
     let { language } = this.props;
-
     return (
       <>
         <LoadingOverlay
@@ -268,6 +366,7 @@ class ManagePatient extends Component {
                       <th>Số điện thoại</th>
                       <th>Giới tính</th>
                       <th>Actions</th>
+                      <th>Trạng thái</th>
                     </tr>
                     {dataPatient && dataPatient.length > 0 ? (
                       dataPatient.map((item, index) => {
@@ -283,7 +382,7 @@ class ManagePatient extends Component {
                           <tr key={index}>
                             <td>{index + 1}</td>
                             <td>{time}</td>
-                            <td>{item.patientData.firstName}</td>
+                            <td>{item.patientData.lastName} {item.patientData.firstName} </td>
                             <td>{item.patientData.address}</td>
                             <td>
                               {item.patientData.phonenumber
@@ -296,7 +395,7 @@ class ManagePatient extends Component {
                                 className="mp-btn-confirm"
                                 onClick={() => this.handleBtnConfirm(item)}
                               >
-                                Xác nhận
+                                Gửi đơn thuốc
                               </button>
                               <button
                                 className="mp-btn-confirm"
@@ -310,6 +409,12 @@ class ManagePatient extends Component {
                               >
                                 Hủy
                               </button>
+                            </td>
+                            <td>
+                              {item.statusId === 'S1' ? 'Lịch hẹn mới chưa xác nhận': ''}
+                              {item.statusId === 'S2' ? 'Đã xác nhận': ''}
+                              {item.statusId === 'S3' ? 'Đã khám xong': ''}
+                              {item.statusId === 'S4' ? 'Đã hủy': ''}
                             </td>
                           </tr>
                         );

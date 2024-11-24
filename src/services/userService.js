@@ -126,6 +126,10 @@ const cancelBooking = (data) => {
   return axios.post("/api/cancel-booking", data);
 };
 
+const cancelBookingEmail = (data) =>{
+  return axios.post("/api/cancel-booking-email", data);
+}
+
 const postUserForgotPassword = (data) => {
   return axios.post("/api/user-forgot-password", data);
 };
@@ -201,4 +205,5 @@ export {
   getTopThreeDoctorOfTheYear,
   postConfirmNewAccount,
   postConfirmNewAccountEmail,
+  cancelBookingEmail,
 };

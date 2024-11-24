@@ -1,8 +1,9 @@
 .login-background {
-  height: 100vh;
+  height: 102vh !important;
   background-image: url(https://raw.githubusercontent.com/giahuyduongdev/sharing-host-files-bookingcare/refs/heads/main/public/background/top-doctor-background.png);
 
   .signup-container {
+    height: 97% !important;
     width: 400px;
     border-radius: 10px;
     background-color: white;

@@ -14,6 +14,10 @@ import { registerNewUserService, postConfirmNewAccount } from "../../services/us
 import { toast } from "react-toastify";
 import BounceLoader from "react-spinners/BounceLoader";
 import LoadingOverlay from "react-loading-overlay";
+import DatePicker from "../../components/Input/DatePicker";
+import { Phone } from "@material-ui/icons";
+import Select from "react-select";
+import { LANGUAGES } from "../../utils";
 
 class Signup extends Component {
   constructor(props) {
@@ -24,17 +28,64 @@ class Signup extends Component {
       firstName: "",
       lastName: "",
       address: "",
+      phonenumber: "",
+      birthday: "",
       isShowPassword: false,
       errMessage: "",
+      selectedGender: "",
       isShowLoading: false,
     };
   }
+
+  async componentDidMount() {
+    this.props.getGenders();
+  }
+
+  handleChangeSelect = (selectedOption) => {
+    this.setState({ selectedGender: selectedOption });
+  };
+
+  buildDataGender = (data) => {
+    let result = [];
+    let language = this.props.language;
+
+    if (data && data.length > 0) {
+      data.map((item) => {
+        let object = {};
+        object.label = language === LANGUAGES.VI ? item.valueVi : item.valueEn;
+        object.value = item.keyMap;
+        result.push(object);
+      });
+    }
+    return result;
+  };
+
+  async componentDidUpdate(prevProps, prevState, snapshot) {
+    if (this.props.language !== prevProps.language) {
+      this.setState({
+        genders: this.buildDataGender(this.props.genders),
+      });
+    }
+    if (this.props.genders !== prevProps.genders) {
+      this.setState({
+        genders: this.buildDataGender(this.props.genders),
+      });
+    }
+  }
+  
 
   handleOnChangeInput = (event, id) => {
     let copyState = { ...this.state };
     copyState[id] = event.target.value;
     this.setState({
       ...copyState,
+    });
+  };
+
+  
+  handleOnChangeDatePicker = (date) => {
+    this.setState({
+      birthday: date[0],
     });
   };
 
@@ -50,15 +101,26 @@ class Signup extends Component {
     }
   };
 
-  createNewUser = async (data) => {
-    this.setState({ isShowLoading: true });
+  createNewUser = async () => {
+    let isValid = this.checkValidateInput();
+    if(isValid === true){
+      this.setState({ isShowLoading: true });
     try {
-      let response = await registerNewUserService(data);
+      let response = await registerNewUserService({
+        email: this.state.email,
+        password: this.state.password,
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        address: this.state.address,
+        phonenumber: this.state.phonenumber,
+        birthday: this.state.birthday,
+        gender: this.state.selectedGender.value
+
+      });
       if (response && response.errCode !== 0) {
         toast.error(response.errMessage);
         this.setState({ isShowLoading: false });
       } else {
-        
         toast.success("User created, pls check your email to authenticate your account!");
         this.setState({ isShowLoading: false });
         this.setState({
@@ -67,26 +129,29 @@ class Signup extends Component {
           firstName: "",
           lastName: "",
           address: "",
+          phonenumber: "",
+          selectedGender: "",
           isShowPassword: false,
         });
         this.props.history.push("/login");
-        await postConfirmNewAccount(data);
+        await postConfirmNewAccount(response.data);
         
         
       }
     } catch (e) {
       console.log(e);
     }
+    }
   };
 
   checkValidateInput = () => {
     let isValid = true;
-    let arrInput = ["email", "password", "firstName", "lastName", "address"];
+    let arrInput = ["email", "password", "firstName", "lastName", "address", "phonenumber", "birthday", "selectedGender"];
     for (let i = 0; i < arrInput.length; i++) {
       if (!this.state[arrInput[i]]) {
         isValid = false;
         // alert("Missing parameter: " + arrInput[i]);
-        toast.error("Missing parameter: " + arrInput[i]);
+        toast.error("Missing: " + arrInput[i]);
         break;
       }
     }
@@ -102,6 +167,7 @@ class Signup extends Component {
   };
 
   render() {
+    console.log(this.state.selectedGender)
     return (
       <div className="login-background">
               <LoadingOverlay
@@ -182,6 +248,32 @@ class Signup extends Component {
                 onChange={(event) => this.handleOnChangeInput(event, "address")}
               />
             </div>
+            <div className="col-12 form-group login-input">
+              <label>Phonenumber:</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Enter your Phonenumber"
+                value={this.state.phonenumber}
+                onChange={(event) => this.handleOnChangeInput(event, "phonenumber")}
+              />
+            </div>
+            <div className="col-12 form-group login-input">
+              <label>Birthday:</label>
+              <DatePicker
+                    onChange={this.handleOnChangeDatePicker}
+                    className="form-control"
+                    value={this.state.birthday}
+                  />
+            </div>
+            <div className="col-12 form-group login-input">
+              <label>Gender:</label>
+              <Select
+                    value={this.state.selectedGender}
+                    onChange={this.handleChangeSelect}
+                    options={this.state.genders}
+                  />
+            </div>
             {/* <div className="col-12" style={{ color: "red" }}>
               {this.state.errMessage}
             </div> */}
@@ -189,7 +281,7 @@ class Signup extends Component {
               <button
                 className="btn-login"
                 onClick={() => {
-                  this.handleAddNewUser();
+                  this.createNewUser();
                 }}
               >
                 Sign Up
@@ -214,13 +306,12 @@ class Signup extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {
-    language: state.app.language,
-  };
+  return { language: state.app.language, genders: state.admin.genders };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    getGenders: () => dispatch(actions.fetchGenderStart()),
     navigate: (path) => dispatch(push(path)),
     // userLoginFail: () => dispatch(actions.adminLoginFail()),
     userLoginSuccess: (userInfor) =>

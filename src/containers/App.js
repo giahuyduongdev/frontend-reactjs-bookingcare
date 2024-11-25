@@ -65,7 +65,8 @@ class App extends Component {
         this.handlePersistorState();
     }
 
-    render() {
+    render()
+     {
         return (
             <Fragment>
                 <Router history={history}>
@@ -133,7 +134,6 @@ class App extends Component {
 const mapStateToProps = state => {
     return {
         started: state.app.started,
-        isLoggedIn: state.user.isLoggedIn
     };
 };
 

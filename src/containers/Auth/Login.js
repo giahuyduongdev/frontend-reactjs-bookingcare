@@ -10,6 +10,8 @@ import { handleLoginApi } from "../../services/userService";
 // import { userLoginSuccess } from "../../store/actions";
 import { toast } from "react-toastify";
 
+import HomeHeader from "../HomePage/HomeHeader";
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -70,8 +72,11 @@ class Login extends Component {
   };
   render() {
     return (
+      
       <div className="login-background">
+          <HomeHeader isShowBanner={false} />
         <div className="login-container">
+
           <div className="login-content row">
             <div className="col-12 text-login">Login</div>
             <div className="col-12 form-group login-input">

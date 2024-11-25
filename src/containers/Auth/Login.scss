@@ -1,6 +1,8 @@
 .login-background {
   height: 100vh;
-  background-image: url(https://raw.githubusercontent.com/giahuyduongdev/sharing-host-files-bookingcare/refs/heads/main/public/background/top-doctor-background.png);
+  background-image: url(https://raw.githubusercontent.com/giahuyduongdev/sharing-host-files-bookingcare/refs/heads/main/public/background/homepage_banner.jpg) !important;
+  background-repeat: no-repeat;
+  background-size: 154%;
   .login-container {
     width: 400px;
     border-radius: 10px;
@@ -8,10 +10,10 @@
     position: absolute;
     margin: auto;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1) !important;
-    top: 0;
+    top: 100px;
     bottom: 0;
     right: 0;
-    left: 0;
+    left: 769px;
     height: 370px !important;
     padding: 0 0 14px 0;
     color: #f0f2f5;

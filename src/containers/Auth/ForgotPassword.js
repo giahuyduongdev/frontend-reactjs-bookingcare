@@ -8,6 +8,8 @@ import { toast } from "react-toastify";
 import LoadingOverlay from "react-loading-overlay";
 import BounceLoader from "react-spinners/BounceLoader";
 
+import HomeHeader from "../HomePage/HomeHeader";
+
 
 
 const ForgotPassword = () => {
@@ -23,6 +25,7 @@ const ForgotPassword = () => {
     // alert(email.length);
     setIsShowLoading(true);
     if (email.trim().length === 0) {
+      setIsShowLoading(false);
       toast.error("Email input empty!");
       return;
     }
@@ -33,8 +36,8 @@ const ForgotPassword = () => {
       toast.success("Send email to retrieve password succeed!");
       setIsShowLoading(false);
     } else {
-      toast.error("User's not found, please retype email!");
       setIsShowLoading(false);
+      toast.error("User's not found, please retype email!");
     }
   };
   return (
@@ -44,6 +47,7 @@ const ForgotPassword = () => {
         spinner={<BounceLoader color={"#86e7d4"} size={60} />}
       ></LoadingOverlay>
       <div className="login-background">
+      <HomeHeader isShowBanner={false} />
         <div className="forgot-password-container">
           <div className="login-content row">
             <div className="col-12 text-login">Forgot Password</div>

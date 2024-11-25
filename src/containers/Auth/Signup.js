@@ -19,6 +19,8 @@ import { Phone } from "@material-ui/icons";
 import Select from "react-select";
 import { LANGUAGES } from "../../utils";
 
+import HomeHeader from "../HomePage/HomeHeader";
+
 class Signup extends Component {
   constructor(props) {
     super(props);
@@ -170,6 +172,7 @@ class Signup extends Component {
     console.log(this.state.selectedGender)
     return (
       <div className="login-background">
+        <HomeHeader isShowBanner={false} />
               <LoadingOverlay
         active={this.state.isShowLoading}
         spinner={<BounceLoader color={"#86e7d4"} size={60} />}

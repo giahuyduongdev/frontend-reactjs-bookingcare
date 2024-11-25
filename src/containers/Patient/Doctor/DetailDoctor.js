@@ -114,7 +114,7 @@ class DetailDoctor extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { language: state.app.language };
+  return { language: state.app.language, userInfo: state.user.userInfo, };
 };
 
 const mapDispatchToProps = (dispatch) => {

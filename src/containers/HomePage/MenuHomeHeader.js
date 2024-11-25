@@ -94,7 +94,8 @@ const MenuHomeHeader = () => {
         history.push("/forgot-password");
         break;
       case "logout":
-        dispatch(actions.processLogout()); //mapDispathToProps
+        dispatch(actions.processLogout());
+        window.location.reload(); //mapDispathToProps
         break;
       case "sign-up":
         history.push("/sign-up");

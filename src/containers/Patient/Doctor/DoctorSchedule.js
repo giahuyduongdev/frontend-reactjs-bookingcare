@@ -188,10 +188,17 @@ class DoctorSchedule extends Component {
   handleClickScheduleTime = (time) => {
     if(this.props.isLoggedIn)
     {
+      if(this.props.userInfo.roleId === 'R3'){
+
     this.setState({
       isOpenModalBooking: true,
       dataScheduleTimeModal: time,
     });
+  }
+  else{
+    toast.error("Chỉ có bệnh nhân được sử dụng chức năng này")
+  }
+
   }
   else
   {

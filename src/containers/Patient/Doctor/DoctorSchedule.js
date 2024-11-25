@@ -10,6 +10,9 @@ import { LANGUAGES } from "../../../utils";
 import { getScheduleDoctorByDate } from "../../../services/userService";
 import { FormattedMessage } from "react-intl";
 import BookingModal from "./Modal/BookingModal";
+import { toast } from "react-toastify";
+
+
 
 class DoctorSchedule extends Component {
   constructor(props) {
@@ -183,10 +186,17 @@ class DoctorSchedule extends Component {
   };
 
   handleClickScheduleTime = (time) => {
+    if(this.props.isLoggedIn)
+    {
     this.setState({
       isOpenModalBooking: true,
       dataScheduleTimeModal: time,
     });
+  }
+  else
+  {
+    toast.error("Cần đăng nhập để đặt lịch khám")
+  }
   };
 
   closeBookingClose = () => {
@@ -202,7 +212,6 @@ class DoctorSchedule extends Component {
       dataScheduleTimeModal,
     } = this.state;
     let { language } = this.props;
-
     return (
       <>
         <div className="doctor-schedule-container">
@@ -279,7 +288,9 @@ class DoctorSchedule extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { language: state.app.language };
+  return { language: state.app.language,        
+    isLoggedIn: state.user.isLoggedIn,
+    userInfo: state.user.userInfo,};
 };
 
 const mapDispatchToProps = (dispatch) => {

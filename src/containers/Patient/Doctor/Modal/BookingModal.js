@@ -4,7 +4,7 @@ import { FormattedMessage } from "react-intl";
 import "./BookingModal.scss";
 import { Modal } from "reactstrap";
 import ProfileDoctor from "../ProfileDoctor";
-import _ from "lodash";
+import _, { values } from "lodash";
 import DatePicker from "../../../../components/Input/DatePicker";
 import * as actions from "../../../../store/actions";
 import { LANGUAGES } from "../../../../utils";
@@ -17,6 +17,7 @@ import LoadingOverlay from "react-loading-overlay";
 import { css } from "@emotion/react";
 import BounceLoader from "react-spinners/BounceLoader";
 import { USER_ROLE } from "../../../../utils";
+import { da } from "date-fns/locale";
 
 class BookingModal extends Component {
   constructor(props) {
@@ -42,6 +43,29 @@ class BookingModal extends Component {
   }
   async componentDidMount() {
     this.props.getGenders();
+    let dataLocal = localStorage.getItem('persist:user');
+    let data = JSON.parse(dataLocal);
+    let dataUserInfo = JSON.parse(data.userInfo)
+    if(dataUserInfo !== null){
+    let dataUser = await getUserInfoProfile(dataUserInfo.email);
+    if(dataUser && dataUser.errCode === 0){
+      let doctorId = this.props.dataTime.doctorId;
+      let timeType = this.props.dataTime.timeType;
+      this.setState({
+        fullName: dataUser.users.firstName,
+        phoneNumber: dataUser.users.phonenumber,
+        email: dataUser.users.email,
+        address: dataUser.users.address,
+        birthday: dataUser.users.birthday,
+        selectedGender: dataUser.users.gender,
+        doctorId: doctorId,
+        timeType: timeType,
+      })
+      this.handleChangeSelect({label :'Nam', value :'M'});
+    }
+  }
+    
+    
   }
 
   buildDataGender = (data) => {
@@ -138,9 +162,11 @@ class BookingModal extends Component {
 
     //validate input
     // !data.email || !data.doctorId || !data.timeType || !data.date
+    
     let date = new Date(this.state.birthday).getTime();
     let timeString = this.buildTimeBooking(this.props.dataTime);
     let doctorName = this.handleDoctorName(this.props.dataTime);
+    console.log(this.state.selectedGender)
     let res = await postPatientBookAppointment({
       fullName: this.state.fullName,
       phonenumber: this.state.phoneNumber,
@@ -159,16 +185,7 @@ class BookingModal extends Component {
 
     if (res && res.errCode === 0) {
       this.setState({
-        fullName: "",
-        phoneNumber: "",
-        email: "",
-        address: "",
         reason: "",
-        birthday: "",
-        selectedGender: "",
-        doctorId: "",
-        genders: "",
-        timeType: "",
         isShowLoading: false,
       })
       toast.success("Booking a new appointment succeed!");

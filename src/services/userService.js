@@ -166,6 +166,10 @@ const getMonthlyRevenueSpecialty = () => {
   return axios.get(`/api/get-monthly-revenue-specialty`);
 };
 
+const getUserInfoProfile = (userEmail) => {
+  return axios.get(`/api/get-user-profile?email=${userEmail}`);
+};
+
 export {
   getMonthlyRevenueSpecialty,
   getTopFourVipPatient,
@@ -206,4 +210,5 @@ export {
   postConfirmNewAccount,
   postConfirmNewAccountEmail,
   cancelBookingEmail,
+  getUserInfoProfile
 };

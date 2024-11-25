@@ -9,13 +9,14 @@ import DatePicker from "../../../../components/Input/DatePicker";
 import * as actions from "../../../../store/actions";
 import { LANGUAGES } from "../../../../utils";
 import Select from "react-select";
-import { postPatientBookAppointment } from "../../../../services/userService";
+import { postPatientBookAppointment, getUserInfoProfile } from "../../../../services/userService";
 import { toast } from "react-toastify";
 import moment from "moment";
 import localization from "moment/locale/vi"; //su dung chung cho cai mac dinh la tieng viet
 import LoadingOverlay from "react-loading-overlay";
 import { css } from "@emotion/react";
 import BounceLoader from "react-spinners/BounceLoader";
+import { USER_ROLE } from "../../../../utils";
 
 class BookingModal extends Component {
   constructor(props) {
@@ -35,6 +36,10 @@ class BookingModal extends Component {
     };
   }
 
+
+  async componentWillUnmountdMount() {
+    
+  }
   async componentDidMount() {
     this.props.getGenders();
   }
@@ -153,7 +158,19 @@ class BookingModal extends Component {
     });
 
     if (res && res.errCode === 0) {
-      this.setState({ isShowLoading: false });
+      this.setState({
+        fullName: "",
+        phoneNumber: "",
+        email: "",
+        address: "",
+        reason: "",
+        birthday: "",
+        selectedGender: "",
+        doctorId: "",
+        genders: "",
+        timeType: "",
+        isShowLoading: false,
+      })
       toast.success("Booking a new appointment succeed!");
       this.props.closeBookingClose();
     } else {
@@ -163,9 +180,11 @@ class BookingModal extends Component {
   };
   render() {
     let { isOpenModal, closeBookingClose, dataTime } = this.props;
-
     let doctorId = dataTime && !_.isEmpty(dataTime) ? dataTime.doctorId : "";
-
+    // const { isLoggedIn, userInfo } = this.props;
+    // if(isLoggedIn){
+      
+    // }
     return (
       <LoadingOverlay
         active={this.state.isShowLoading}
@@ -303,7 +322,10 @@ class BookingModal extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { language: state.app.language, genders: state.admin.genders };
+  return { language: state.app.language, genders: state.admin.genders,
+    isLoggedIn: state.user.isLoggedIn,
+    userInfo: state.user.userInfo,
+    };
 };
 
 const mapDispatchToProps = (dispatch) => {

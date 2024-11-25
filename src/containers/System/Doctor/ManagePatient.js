@@ -345,7 +345,7 @@ class ManagePatient extends Component {
           spinner={<ClimbingBoxLoader color={"#86e7d4"} size={15} />}
         >
           <div className="manage-patient-container">
-            <div className="m-p-title">Quản lý bệnh nhận khám bệnh</div>
+            <div className="m-p-title">Quản lý bệnh nhân khám bệnh</div>
             <div className="manage-patient-body row">
               <div className="col-4 form-group">
                 <label>Chọn ngày khám</label>
@@ -366,11 +366,13 @@ class ManagePatient extends Component {
                       <th>Số điện thoại</th>
                       <th>Giới tính</th>
                       <th>Năm sinh</th>
+                      <th>Lý do khám</th>
                       <th>Actions</th>
                       <th>Trạng thái</th>
                     </tr>
                     {dataPatient && dataPatient.length > 0 ? (
                       dataPatient.map((item, index) => {
+                        console.log(item)
                         let time =
                           language === LANGUAGES.VI
                             ? item.timeTypeDataPatient?.valueVi
@@ -398,6 +400,7 @@ class ManagePatient extends Component {
                             </td>
                             <td>{gender}</td>
                             <td>{`${date}/${month}/${year}`}</td>
+                            <td>{item.reason}</td>
                             <td>
                               <button
                                 className="mp-btn-confirm"
@@ -429,8 +432,8 @@ class ManagePatient extends Component {
                       })
                     ) : (
                       <tr>
-                        <td colSpan="6" style={{ textAlign: "center" }}>
-                          no data
+                        <td colSpan="10" style={{ textAlign: "center" }}>
+                          None
                         </td>
                       </tr>
                     )}

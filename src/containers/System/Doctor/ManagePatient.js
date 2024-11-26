@@ -355,6 +355,9 @@ class ManagePatient extends Component {
                   value={this.state.currentDate}
                 />
               </div>
+		          <button class="btn-green" onClick={() =>{this.componentDidMount()}}>
+			          <img class="icon" src="https://htmlacademy.ru/assets/icons/reload-6x-white.png"/>
+		          </button>
               <div className="col-12 table-manage-patient">
                 <table>
                   <tbody>

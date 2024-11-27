@@ -18,6 +18,7 @@ import account from "../../_mocks_/account";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import * as actions from "../../../../store/actions";
+import { toast } from "react-toastify";
 
 // ----------------------------------------------------------------------
 
@@ -96,7 +97,8 @@ export default function AccountPopover() {
     history.push("/home");
   };
   const handleLogout = () => {
-    dispatch(actions.processLogout()); //mapDispathToProps
+    dispatch(actions.processLogout());
+    toast.success("Logout successful!") //mapDispathToProps
     history.push("/home");
   };
   return (

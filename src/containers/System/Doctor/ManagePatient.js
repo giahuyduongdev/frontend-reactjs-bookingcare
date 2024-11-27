@@ -194,8 +194,6 @@ class ManagePatient extends Component {
       checkTime = item.timeTypeDataPatient.valueVi.slice(8,10)
     }
 
-    console.log(new Date().getHours())
-    console.log(new Date().getMinutes()) 
     if(new Date().getHours() > checkTime){
       note = 'Bệnh nhân không có mặt'
     }
@@ -204,6 +202,7 @@ class ManagePatient extends Component {
     }
     if(item.statusId === 'S2'){
       let res = await cancelBookingEmail({
+        id: item.id,
         doctorId: item.doctorId,
         patientId: item.patientId,
         timeType: item.timeType,
@@ -436,7 +435,7 @@ class ManagePatient extends Component {
                     ) : (
                       <tr>
                         <td colSpan="10" style={{ textAlign: "center" }}>
-                          None
+                          Không có lịch khám
                         </td>
                       </tr>
                     )}

@@ -23,6 +23,7 @@ import NavSection from "../../components/NavSection";
 //
 import sidebarConfig from "./SidebarConfig";
 import sidebarConfigDoctor from "./SidebarConfigDoctor";
+import SidebarConfigPatient from "./SidebarConfigPatient";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
@@ -99,11 +100,15 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
     if (userInfo && userInfo.roleId && userInfo.roleId === USER_ROLE.DOCTOR) {
       setRole("DOCTOR");
     }
+    if (userInfo && userInfo.roleId && userInfo.roleId === USER_ROLE.PATIENT) {
+      setRole("PATIENT");
+    }
     if (
       userInfo &&
       userInfo.roleId &&
       userInfo.roleId !== USER_ROLE.DOCTOR &&
-      userInfo.roleId !== USER_ROLE.ADMIN
+      userInfo.roleId !== USER_ROLE.ADMIN &&
+      userInfo.roleId !== USER_ROLE.PATIENT
     ) {
       setRole("");
     }
@@ -159,6 +164,13 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
       {userInfoState && userInfoState.roleId === USER_ROLE.DOCTOR && (
         <NavSection navConfig={sidebarConfigDoctor} />
       )}
+
+      {/* sidebar patient */}
+      {userInfoState && userInfoState.roleId === USER_ROLE.PATIENT && (
+        <NavSection navConfig={SidebarConfigPatient} />
+      )}     
+
+      
 
       <Box sx={{ flexGrow: 1 }} />
     </Scrollbar>

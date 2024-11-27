@@ -193,9 +193,9 @@ class ManageDoctor extends Component {
       doctorId: this.state.selectedOption.value,
       action: hasOldData === true ? CRUD_ACTIONS.EDIT : CRUD_ACTIONS.CREATE,
 
-      selectedPrice: this.state.selectedPrice?.value,
-      selectedPayment: this.state.selectedPaymen?.value,
-      selectedProvice: this.state.selectedProvice?.value,
+      selectedPrice: this.state.selectedPrice.value,
+      selectedPayment: this.state.selectedPayment.value,
+      selectedProvice: this.state.selectedProvice.value,
       nameClinic: this.state.nameClinic,
       addressClinic: this.state.addressClinic,
       note: this.state.note,

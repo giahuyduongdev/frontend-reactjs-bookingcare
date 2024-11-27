@@ -114,6 +114,10 @@ const getAllPatientForDoctor = (data) => {
   );
 };
 
+const getAllAppointmentForPatient = (data) =>{
+  return axios.get(`/api/get-list-appointment-for-patient?patientId=${data.patientId}&date=${data.date}`);
+};
+
 const postSendRemedy = (data) => {
   return axios.post("/api/send-remedy", data);
 };
@@ -210,5 +214,6 @@ export {
   postConfirmNewAccount,
   postConfirmNewAccountEmail,
   cancelBookingEmail,
-  getUserInfoProfile
+  getUserInfoProfile,
+  getAllAppointmentForPatient
 };

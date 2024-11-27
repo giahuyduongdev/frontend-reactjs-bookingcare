@@ -17,6 +17,7 @@ import ManageScheduleOneDoctor from "../../containers/System/Doctor/ManageSchedu
 import ManageClinic from "../../containers/System/Clinic/ManageClinic";
 import ManageSpecialty from "../../containers/System/Specialty/ManageSpecialty";
 import ManagePatient from "../../containers/System/Doctor/ManagePatient";
+import ManageAppointmentPatient from "../System/Patient/ManageAppointmentPatient";
 
 // ----------------------------------------------------------------------
 
@@ -45,6 +46,13 @@ export default function Router() {
           element: <ManageScheduleOneDoctor />,
         }, //quan ly ke hoach kham benh chi rieng mot bac si do
         { path: "manage-patient", element: <ManagePatient /> }, //quan ly benh nhan
+      ],
+    },
+    {
+      path: "/admin-dashboard/patient",
+      element: <DashboardLayout />,
+      children: [
+        { path: "manage-appointment-patient", element: <ManageAppointmentPatient /> }, //quan ly benh nhan
       ],
     },
     // {

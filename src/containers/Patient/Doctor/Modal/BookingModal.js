@@ -188,11 +188,11 @@ class BookingModal extends Component {
         reason: "",
         isShowLoading: false,
       })
-      toast.success("Booking a new appointment succeed!");
+      toast.success("Đăng ký lịch hẹn thành công");
       this.props.closeBookingClose();
     } else {
       this.setState({ isShowLoading: false });  
-      toast.error("Booking a new appointment error!");
+      toast.error("Lỗi");
     }
   };
   render() {

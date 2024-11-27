@@ -26,18 +26,18 @@ const ForgotPassword = () => {
     setIsShowLoading(true);
     if (email.trim().length === 0) {
       setIsShowLoading(false);
-      toast.error("Email input empty!");
+      toast.error("Chưa nhập email");
       return;
     }
     let res = await postUserForgotPassword({
       email: email.trim(),
     });
     if (res && res.errCode === 0) {
-      toast.success("Send email to retrieve password succeed!");
+      toast.success("Gửi email cập nhật mật khẩu thành công");
       setIsShowLoading(false);
     } else {
       setIsShowLoading(false);
-      toast.error("User's not found, please retype email!");
+      toast.error("Người dùng không tồn tại, vui lòng nhập lại email");
     }
   };
   return (
@@ -50,13 +50,13 @@ const ForgotPassword = () => {
       <HomeHeader isShowBanner={false} />
         <div className="forgot-password-container">
           <div className="login-content row">
-            <div className="col-12 text-login">Forgot Password</div>
+            <div className="col-12 text-login">Quên Mật Khẩu</div>
             <div className="col-12 form-group login-input">
               <label>Email:</label>
               <input
                 type="text"
                 className="form-control"
-                placeholder="Enter your email to retrieve password"
+                placeholder="Nhập email của bạn để lấy lại mật khẩu"
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
               />

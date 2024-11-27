@@ -94,21 +94,21 @@ class ManagePatient extends Component {
           this.setState({
             isOpenCreateImageRemedyModal: false,
           });
-          toast.error("Lịch hẹn chưa được xác nhận...!");
+          toast.error("Lịch hẹn chưa được xác nhận");
         }
         if(item.statusId === 'S3')
           {
             this.setState({
               isOpenCreateImageRemedyModal: false,
             });
-            toast.error("Lịch hẹn đã được hoàn thành...!");
+            toast.error("Lịch hẹn đã được hoàn thành");
           }
         if(item.statusId === 'S4')
           {
             this.setState({
               isOpenCreateImageRemedyModal: false,
             });
-            toast.error("Lịch hẹn đã bị hủy...!");
+            toast.error("Lịch hẹn đã bị hủy");
           }
   
     }
@@ -158,21 +158,21 @@ class ManagePatient extends Component {
         this.setState({
           isOpenCreateImageRemedyModal: false,
         });
-        toast.error("Lịch hẹn chưa được xác nhận...!");
+        toast.error("Lịch hẹn chưa được xác nhận");
       }
       if(item.statusId === 'S3')
         {
           this.setState({
             isOpenCreateImageRemedyModal: false,
           });
-          toast.error("Lịch hẹn đã được hoàn thành...!");
+          toast.error("Lịch hẹn đã được hoàn thành");
         }
       if(item.statusId === 'S4')
         {
           this.setState({
             isOpenCreateImageRemedyModal: false,
           });
-          toast.error("Lịch hẹn đã bị hủy...!");
+          toast.error("Lịch hẹn đã bị hủy");
         }
 
      
@@ -215,25 +215,25 @@ class ManagePatient extends Component {
       });
       if (res && res.errCode === 0) {
         this.setState({ isShowLoading: false });
-        toast.success("Cancel appointment succeed!");
+        toast.success("Hủy lịch hẹn thành công");
         await this.getDataPatient();
       } else {
         this.setState({ isShowLoading: false });
-        toast.error("Something wrongs...!");
+        toast.error("Lỗi");
       }
     }
     else{
       if(item.statusId === 'S1'){
       this.setState({ isShowLoading: false });
-      toast.error("Lịch hẹn chưa được khách hàng xác nhận...!");
+      toast.error("Lịch hẹn chưa được khách hàng xác nhận");
       }
       if(item.statusId === 'S3'){
         this.setState({ isShowLoading: false });
-        toast.error("Lịch hẹn đã được hoàn thành...!");
+        toast.error("Lịch hẹn đã được hoàn thành");
       }
       if(item.statusId === 'S4'){
         this.setState({ isShowLoading: false });
-        toast.error("Lịch hẹn đã hủy...!");
+        toast.error("Lịch hẹn đã hủy");
       }
       }
    
@@ -289,12 +289,12 @@ class ManagePatient extends Component {
     });
     if (res && res.errCode === 0) {
       this.setState({ isShowLoading: false });
-      toast.success("Send Remedy succeed!");
+      toast.success("Gửi đơn thuốc thành công");
       this.closeRemedyModal();
       await this.getDataPatient();
     } else {
       this.setState({ isShowLoading: true });
-      toast.error("Something wrongs...!");
+      toast.error("Lỗi");
     }
     this.setState({ isShowLoading: false });
   };
@@ -318,12 +318,12 @@ class ManagePatient extends Component {
     });
     if (res && res.errCode === 0) {
       this.setState({ isShowLoading: false });
-      toast.success("Create Remedy succeed!");
+      toast.success("Tạo đơn thuốc thành công");
       this.closeCreateImageRemedyModal();
       await this.getDataPatient();
     } else {
       this.setState({ isShowLoading: true });
-      toast.error("Something wrongs...!");
+      toast.error("Lỗi");
     }
     this.setState({ isShowLoading: false });
   };

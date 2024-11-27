@@ -123,7 +123,7 @@ class Signup extends Component {
         toast.error(response.errMessage);
         this.setState({ isShowLoading: false });
       } else {
-        toast.success("User created, pls check your email to authenticate your account!");
+        toast.success("Tài khoản được tạo, vui lòng check email để xác thực");
         this.setState({ isShowLoading: false });
         this.setState({
           password: "",
@@ -153,7 +153,7 @@ class Signup extends Component {
       if (!this.state[arrInput[i]]) {
         isValid = false;
         // alert("Missing parameter: " + arrInput[i]);
-        toast.error("Missing: " + arrInput[i]);
+        toast.error("Chưa nhập: " + arrInput[i]);
         break;
       }
     }
@@ -179,24 +179,24 @@ class Signup extends Component {
       ></LoadingOverlay>
         <div className="signup-container">
           <div className="login-content row">
-            <div className="col-12 text-login">Sign Up</div>
+            <div className="col-12 text-login">Đăng Ký</div>
             <div className="col-12 form-group login-input">
               <label>Email:</label>
               <input
                 type="text"
                 className="form-control"
-                placeholder="Enter your email"
+                placeholder="Nhập email của bạn"
                 value={this.state.email}
                 onChange={(event) => this.handleOnChangeInput(event, "email")}
               />
             </div>
             <div className="col-12 form-group login-input">
-              <label>Password:</label>
+              <label>Mật khẩu:</label>
               <div className="custom-input-password">
                 <input
                   className="form-control"
                   type={this.state.isShowPassword ? "text" : "password"}
-                  placeholder="Enter your password"
+                  placeholder="Nhập mật khẩu của bạn"
                   onChange={(event) =>
                     this.handleOnChangeInput(event, "password")
                   }
@@ -218,11 +218,11 @@ class Signup extends Component {
               </div>
             </div>
             <div className="col-12 form-group login-input">
-              <label>Firstname:</label>
+              <label>Tên:</label>
               <input
                 type="text"
                 className="form-control"
-                placeholder="Enter your firstname"
+                placeholder="Nhập tên của bạn"
                 value={this.state.firstName}
                 onChange={(event) =>
                   this.handleOnChangeInput(event, "firstName")
@@ -230,11 +230,11 @@ class Signup extends Component {
               />
             </div>
             <div className="col-12 form-group login-input">
-              <label>Lastname:</label>
+              <label>Họ:</label>
               <input
                 type="text"
                 className="form-control"
-                placeholder="Enter your lastname"
+                placeholder="Nhập họ của bạn"
                 value={this.state.lastName}
                 onChange={(event) =>
                   this.handleOnChangeInput(event, "lastName")
@@ -242,27 +242,27 @@ class Signup extends Component {
               />
             </div>
             <div className="col-12 form-group login-input">
-              <label>Address:</label>
+              <label>Địa chỉ:</label>
               <input
                 type="text"
                 className="form-control"
-                placeholder="Enter your Address"
+                placeholder="Nhập địa chỉ của bạn"
                 value={this.state.address}
                 onChange={(event) => this.handleOnChangeInput(event, "address")}
               />
             </div>
             <div className="col-12 form-group login-input">
-              <label>Phonenumber:</label>
+              <label>Số điện thoại:</label>
               <input
                 type="text"
                 className="form-control"
-                placeholder="Enter your Phonenumber"
+                placeholder="Nhập số điện thoại của bạn"
                 value={this.state.phonenumber}
                 onChange={(event) => this.handleOnChangeInput(event, "phonenumber")}
               />
             </div>
             <div className="col-12 form-group login-input">
-              <label>Birthday:</label>
+              <label>Ngày sinh:</label>
               <DatePicker
                     onChange={this.handleOnChangeDatePicker}
                     className="form-control"
@@ -270,7 +270,7 @@ class Signup extends Component {
                   />
             </div>
             <div className="col-12 form-group login-input">
-              <label>Gender:</label>
+              <label>Giới tính:</label>
               <Select
                     value={this.state.selectedGender}
                     onChange={this.handleChangeSelect}

@@ -109,7 +109,7 @@ class ManageScheduleOneDoctor extends Component {
               item.isSelected = !item.isSelected;
             }
             else{
-              toast.error("Time has passed!");
+              toast.error("Thời gian đã trôi qua");
             }
         }
 
@@ -125,11 +125,11 @@ class ManageScheduleOneDoctor extends Component {
     let { rangeTime, selectedDoctor, currentDate } = this.state;
     let result = [];
     if (!currentDate) {
-      toast.error("Invalid date!");
+      toast.error("Định dạng ngày lỗi");
       return;
     }
     if (selectedDoctor && _.isEmpty(selectedDoctor)) {
-      toast.error("Invalid selected doctor!");
+      toast.error("Bác sĩ đã chọn không hợp lệ");
       return;
     }
 
@@ -146,7 +146,7 @@ class ManageScheduleOneDoctor extends Component {
           result.push(object);
         });
       } else {
-        toast.error("Invalid selected time!");
+        toast.error("Thời gian đã chọn không hợp lệ");
         return;
       }
     }
@@ -157,10 +157,9 @@ class ManageScheduleOneDoctor extends Component {
       date: formatedDate,
     });
     if (res && res.errCode === 0) {
-      toast.success("Save infor succeed!");
+      toast.success("Lưu thông tin thành công");
     } else {
-      toast.error("error saveBulkScheduleDoctor!");
-      console.log("error saveBulkScheduleDoctor!");
+      toast.error("Lỗi");
     }
   };
   render() {

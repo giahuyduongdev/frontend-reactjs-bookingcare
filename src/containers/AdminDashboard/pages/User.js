@@ -194,7 +194,7 @@ export default function User() {
       if (response && response.errCode !== 0) {
         toast.error(response.errMessage);
       } else {
-        toast.success("Create new user succeed!");
+        toast.success("Tạo người dùng mới thành công");
         await getAllUsersFromReact();
         setIsOpenModalUser(false);
         // emitter.emit("EVENT_CLEAR_MODAL_DATA", { id: "your id" }); // cach truyen them data
@@ -219,7 +219,7 @@ export default function User() {
     try {
       let res = await editUserService(user);
       if (res && res.errCode === 0) {
-        toast.success("Update user succeed!");
+        toast.success("Cập nhật người dùng thành công");
         setIsOpenModalEditUser(false);
         await getAllUsersFromReact();
       } else {
@@ -234,7 +234,7 @@ export default function User() {
     try {
       let res = await deleteUserService(user.id);
       if (res && res.errCode === 0) {
-        toast.success("Delete user succeed!");
+        toast.success("Xóa người dùng thành công");
         await getAllUsersFromReact();
       } else {
         toast.error(res.errMessage);

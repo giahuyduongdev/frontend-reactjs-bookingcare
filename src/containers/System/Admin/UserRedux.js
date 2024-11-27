@@ -169,7 +169,7 @@ class UserRedux extends Component {
     for (let i = 0; i < arrCheck.length; i++) {
       if (!this.state[arrCheck[i]]) {
         isValid = false;
-        toast.error("This input is required: " + arrCheck[i]);
+        toast.error("Chưa nhập: " + arrCheck[i]);
         break;
       }
     }

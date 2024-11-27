@@ -45,7 +45,7 @@ class Login extends Component {
         toast.error(this.state.errMessage);
       }
       if (data && data.errCode === 0) {
-        toast.success("Login successfully!");
+        toast.success("Đăng nhập thành công");
         this.props.userLoginSuccess(data.user);
       }
     } catch (error) {
@@ -78,24 +78,24 @@ class Login extends Component {
         <div className="login-container">
 
           <div className="login-content row">
-            <div className="col-12 text-login">Login</div>
+            <div className="col-12 text-login">Đăng nhập</div>
             <div className="col-12 form-group login-input">
-              <label>Username:</label>
+              <label>Tên đăng nhập:</label>
               <input
                 type="text"
                 className="form-control"
-                placeholder="Enter your username"
+                placeholder="Nhập tên đăng nhập"
                 value={this.state.username}
                 onChange={(event) => this.handleOnChangeUsername(event)}
               />
             </div>
             <div className="col-12 form-group login-input">
-              <label>Password:</label>
+              <label>Mật khẩu:</label>
               <div className="custom-input-password">
                 <input
                   className="form-control"
                   type={this.state.isShowPassword ? "text" : "password"}
-                  placeholder="Enter your password"
+                  placeholder="Nhập mật khẩu"
                   onChange={(event) => this.handleOnChangePassword(event)}
                   onKeyDown={(event) => this.handleKeyDown(event)}
                 />
@@ -132,14 +132,14 @@ class Login extends Component {
               onClick={() => {
                 this.props.history.push("/forgot-password");
               }}
-              >Forgot your password</span>
+              >Quên mật khẩu</span>
               <span
                 className="sign-up"
                 onClick={() => {
                   this.props.history.push("/sign-up");
                 }}
               >
-                Sign up
+                Đăng ký
               </span>
             </div>
             {/* <div className="col-12 text-center mt-3">

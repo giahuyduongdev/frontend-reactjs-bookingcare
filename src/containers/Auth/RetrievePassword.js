@@ -126,14 +126,14 @@ const RetrievePassword = () => {
         });
 
         if (res && res.errCode === 0) {
-          toast.success("Retrieve password succeed!");
+          toast.success("Cập nhật mật khẩu mới thành công");
           history.push("/login");
         } else {
-          toast.error("Retrieve password error!");
+          toast.error("Lỗi");
         }
       }
     } else {
-      toast.error("New password and confirm new password do not match!")
+      toast.error("Mật khẩu mới và xác thực mật khẩu không giống nhau")
     };
   };
   const classes = useStyles();

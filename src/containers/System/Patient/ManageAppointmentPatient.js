@@ -78,21 +78,21 @@ class ManagePatient extends Component {
       });
       if (res && res.errCode === 0) {
         this.setState({ isShowLoading: false });
-        toast.success("Cancel appointment succeed!");
+        toast.success("Hủy lịch hẹn thành công");
         await this.getDataPatient();
       } else {
         this.setState({ isShowLoading: false });
-        toast.error("Something wrongs...!");
+        toast.error("Lỗi");
       }
     }
     else{
         if(item.statusId === 'S3'){
           this.setState({ isShowLoading: false });
-          toast.error("Lịch hẹn đã được hoàn thành...!");
+          toast.error("Lịch hẹn đã được hoàn thành");
         }
         if(item.statusId === 'S4'){
           this.setState({ isShowLoading: false });
-          toast.error("Lịch hẹn đã hủy...!");
+          toast.error("Lịch hẹn đã hủy");
         }
     }
 
@@ -183,7 +183,7 @@ class ManagePatient extends Component {
                     ) : (
                       <tr>
                         <td colSpan="11" style={{ textAlign: "center" }}>
-                          Không có lịch khám
+                          Không có lịch hẹn
                         </td>
                       </tr>
                     )}

@@ -98,7 +98,7 @@ export default function AccountPopover() {
   };
   const handleLogout = () => {
     dispatch(actions.processLogout());
-    toast.success("Logout successful!") //mapDispathToProps
+    toast.success("Đăng xuất thành công") //mapDispathToProps
     history.push("/home");
   };
   return (

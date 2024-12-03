@@ -21,6 +21,11 @@
     .booking-modal-body {
       padding: 15px;
       height: 100%;
+      .row{
+        input{
+          background-color: white !important;
+        }
+      }
     }
 
     .booking-modal-footer {

@@ -198,10 +198,6 @@ class BookingModal extends Component {
   render() {
     let { isOpenModal, closeBookingClose, dataTime } = this.props;
     let doctorId = dataTime && !_.isEmpty(dataTime) ? dataTime.doctorId : "";
-    // const { isLoggedIn, userInfo } = this.props;
-    // if(isLoggedIn){
-      
-    // }
     return (
       <LoadingOverlay
         active={this.state.isShowLoading}
@@ -240,6 +236,7 @@ class BookingModal extends Component {
                     <FormattedMessage id="patient.booking-modal.fullName" />
                   </label>
                   <input
+                    disabled
                     className="form-control"
                     value={this.state.fullName}
                     onChange={(event) =>
@@ -252,6 +249,7 @@ class BookingModal extends Component {
                     <FormattedMessage id="patient.booking-modal.phoneNumber" />
                   </label>
                   <input
+                    disabled
                     className="form-control"
                     value={this.state.phoneNumber}
                     onChange={(event) =>
@@ -264,6 +262,7 @@ class BookingModal extends Component {
                     <FormattedMessage id="patient.booking-modal.email" />
                   </label>
                   <input
+                    disabled
                     className="form-control"
                     value={this.state.email}
                     onChange={(event) =>
@@ -276,6 +275,7 @@ class BookingModal extends Component {
                     <FormattedMessage id="patient.booking-modal.address" />
                   </label>
                   <input
+                    disabled
                     className="form-control"
                     value={this.state.address}
                     onChange={(event) =>
@@ -300,6 +300,7 @@ class BookingModal extends Component {
                     <FormattedMessage id="patient.booking-modal.birthday" />
                   </label>
                   <DatePicker
+                    disabled
                     onChange={this.handleOnChangeDatePicker}
                     className="form-control"
                     value={this.state.birthday}
@@ -309,10 +310,12 @@ class BookingModal extends Component {
                   <label>
                     <FormattedMessage id="patient.booking-modal.gender" />
                   </label>
-                  <Select
-                    value={this.state.selectedGender}
+                  <input
+                    className="form-control"
+                    disabled
+                    value={this.state.selectedGender.label}
                     onChange={this.handleChangeSelect}
-                    options={this.state.genders}
+                    // options={this.state.genders}
                   />
                 </div>
               </div>

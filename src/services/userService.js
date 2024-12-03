@@ -20,7 +20,7 @@ const postConfirmNewAccountEmail = (data) => {
   return axios.post("/api/user-confirm-account-email", data);
 };
 
-const registerNewUserService = (data) =>{
+const registerNewUserService = (data) => {
   return axios.post("/api/register-new-user", data);
 }
 
@@ -73,6 +73,18 @@ const getExtraInforDoctorById = (doctorId) => {
 const getProfileDoctorById = (doctorId) => {
   return axios.get(`/api/get-profile-doctor-by-id?doctorId=${doctorId}`);
 };
+
+const getProfileByUser = (email) => {
+  return axios.get(`/api/get-user-profile?email=${email}`);
+}
+
+const changePassword = (data) => {
+  return axios.put("api/change-password-user", data);
+}
+
+const UpdateUser = (data) => {
+  return axios.put("api/edit-user", data);
+}
 
 const postPatientBookAppointment = (data) => {
   return axios.post("/api/patient-book-appointment", data);
@@ -201,4 +213,7 @@ export {
   getTopThreeDoctorOfTheYear,
   postConfirmNewAccount,
   postConfirmNewAccountEmail,
+  getProfileByUser,
+  changePassword,
+  UpdateUser
 };

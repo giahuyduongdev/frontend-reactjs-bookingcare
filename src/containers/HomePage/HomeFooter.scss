@@ -1,20 +1,21 @@
-.home-footer{
+.home-footer {
   background-color: #64b9e5;
-  height: 80px;
   width: 100%;
-  p{
+
+  p {
     font-family: Montserrat, sans-serif !important;
-    color: #edf7fc;
-    line-height: 1.5 !important;
-    font-size: 12px;
+    color: black;
+    font-size: 15px;
   }
-  .content-right{
+
+  .content-right {
     display: flex;
     float: right;
     margin-right: 10px;
   }
 }
-.text{
-  width: 33.3%;
+
+.text {
+  width: max-content;
   height: 18px;
 }

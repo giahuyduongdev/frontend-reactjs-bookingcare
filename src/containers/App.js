@@ -44,6 +44,8 @@ import CustomScrollbars from "../components/CustomScrollbars";
 import { CustomToastCloseButton } from "../components/CustomToast";
 
 import Profile from "./Patient/Profile";
+import '../index.css';
+import ChangePassword from './Patient/ChangePassword.js';
 
 class App extends Component {
     handlePersistorState = () => {
@@ -78,30 +80,31 @@ class App extends Component {
 
                                     <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
                                     <Route path={path.SIGNUP} exact component={Signup} />
-                                    <Route path={path.FORGOT_PASSWORD} exact component={ForgotPassword}/>
-                                    <Route path={path.RETRIEVE_PASSWORD} component={RetrievePassword}/>
-                                    <Route path={path.CONFIRM_NEW_ACCOUNT} component={ConfirmNewAccount}/>
+                                    <Route path={path.FORGOT_PASSWORD} exact component={ForgotPassword} />
+                                    <Route path={path.RETRIEVE_PASSWORD} component={RetrievePassword} />
+                                    <Route path={path.CONFIRM_NEW_ACCOUNT} component={ConfirmNewAccount} />
 
                                     {/* <Route path={path.SYSTEM} component={userIsAuthenticated(System)} /> */}
-                                    <Route path={path.ADMIN_DASHBOARD} component={userIsAuthenticated(indexAdminDashboard)}/>
+                                    <Route path={path.ADMIN_DASHBOARD} component={userIsAuthenticated(indexAdminDashboard)} />
                                     {/* <Route path={"/doctor"} component={userIsAuthenticated(Doctor)}/> */}
 
                                     <Route path={path.HOMEPAGE} component={HomePage} />
 
                                     <Route path={path.DETAIL_SPECIALTY} component={DetailSpecialty} />
-                                    <Route path={path.LIST_SPECIALTY} exact component={ListSpecialty}/>
+                                    <Route path={path.LIST_SPECIALTY} exact component={ListSpecialty} />
 
                                     <Route path={path.DETAIL_CLINIC} component={DetailClinic} />
-                                    <Route path={path.LIST_MEDICAL_FACILITY} exact component={ListMedicalFacility}/>
-                                    
+                                    <Route path={path.LIST_MEDICAL_FACILITY} exact component={ListMedicalFacility} />
+
 
                                     <Route path={path.DETAIL_DOCTOR} component={DetailDoctor} />
-                                    <Route path={path.LIST_OUSTANDING_DOCTOR} exact component={ListOutStandingDoctor}/>
+                                    <Route path={path.LIST_OUSTANDING_DOCTOR} exact component={ListOutStandingDoctor} />
 
-                                    <Route path={path.VERIFY_EMAIL_BOOKING} component={VerifyEmail}/>
+                                    <Route path={path.VERIFY_EMAIL_BOOKING} component={VerifyEmail} />
 
                                     <Route path={path.PROFILE} component={Profile} />
-                                    
+                                    <Route path={path.CHANGE_PASSWORD} component={ChangePassword} />
+
                                     <Route path="*"><NotFound /></Route>
                                 </Switch>
                             </CustomScrollbars>
@@ -113,15 +116,15 @@ class App extends Component {
                             closeButton={<CustomToastCloseButton />}
                         /> */}
                         <ToastContainer
-                        position="bottom-right"
-                        autoClose={5000}
-                        hideProgressBar={false}
-                        newestOnTop={false}
-                        closeOnClick
-                        rtl={false}
-                        pauseOnFocusLoss
-                        draggable
-                        pauseOnHover
+                            position="bottom-right"
+                            autoClose={5000}
+                            hideProgressBar={false}
+                            newestOnTop={false}
+                            closeOnClick
+                            rtl={false}
+                            pauseOnFocusLoss
+                            draggable
+                            pauseOnHover
                         />
                     </div>
                 </Router>

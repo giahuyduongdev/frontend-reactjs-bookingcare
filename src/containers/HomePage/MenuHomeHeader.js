@@ -1,30 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { withStyles } from "@material-ui/core/styles";
-
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import LockIcon from "@material-ui/icons/Lock";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import HomeIcon from "@material-ui/icons/Home";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
-
-import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-
-import { connect } from "react-redux";
-import { LANGUAGES } from "../../utils";
-import { USER_ROLE } from '../../utils';
-
-import { changeLanguageApp } from "../../store/actions/appActions";
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../../store/actions";
-
-import './MenuHomeHeader.scss'
+import { getProfileByUser } from "../../services/userService";
+import Profile from "../Patient/Profile";
+import './MenuHomeHeader.scss';
+import ChangePassword from "../Patient/ChangePassword";
 
 const StyledMenu = withStyles({
   paper: {
@@ -58,24 +49,32 @@ const StyledMenuItem = withStyles((theme) => ({
 }))(MenuItem);
 
 const MenuHomeHeader = () => {
-  //mapStateToProps Redux
-  const { isLoggedIn, userInfo, language } = useSelector((state) => ({
+  const { isLoggedIn, language } = useSelector((state) => ({
     isLoggedIn: state.user.isLoggedIn,
-    userInfo: state.user.userInfo,
     language: state.app.language,
   }));
+  const userInfo = useSelector((state) => state.user.userInfo);
+  const [data, setData] = useState([]);
+  const [isProfileModalVisible, setIsProfileModalVisible] = useState(false);
+  const [isChangePasswordModalVisible, setIsChangePasswordModalVisible] = useState(false); // Modal cho đổi mật khẩu
+
+  const ShowProfile = async () => {
+    if (userInfo && userInfo.email) {
+      const email = userInfo.email;
+      const response = await getProfileByUser(email);
+      setData(response.users);
+    } else {
+      console.log("User info is not available or email is missing.");
+    }
+  };
+
+  useEffect(() => {
+    ShowProfile();
+  }, [userInfo]);
+
   const dispatch = useDispatch();
-
-  //   processLogout: () => dispatch(actions.processLogout()),
-
-  //   const [state, setState] = useState({
-  //     isLoggedIn: false,
-  //     userInfo: {},
-  //     language: "",
-  //   });
-
   let history = useHistory();
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -94,33 +93,37 @@ const MenuHomeHeader = () => {
         history.push("/forgot-password");
         break;
       case "logout":
-        dispatch(actions.processLogout()); //mapDispathToProps
+        dispatch(actions.processLogout());
         break;
       case "sign-up":
         history.push("/sign-up");
         break;
+      case "change-password":
+        setIsChangePasswordModalVisible(true); // Hiện modal thay đổi mật khẩu
+        handleClose();
+        break;
       case "profile":
-        history.push("/profile");
-        break;   
+        setIsProfileModalVisible(true); // Hiện modal profile
+        handleClose();
+        break;
       default:
-      // code block
     }
   };
+
+  const handleProfileModalCancel = () => {
+    setIsProfileModalVisible(false);
+  };
+
+  const handleChangePasswordModalCancel = () => {
+    setIsChangePasswordModalVisible(false);
+  };
+
   return (
     <div>
-      {/* <Button
-        aria-controls="customized-menu"
-        aria-haspopup="true"
-        variant="contained"
-        color="primary"
-        onClick={handleClick}
-      > */}
-      {/* Open Menu */}
       <span onClick={handleClick}>
         <i className="fas fa-bars"></i>
       </span>
 
-      {/* </Button> */}
       <StyledMenu
         id="customized-menu"
         anchorEl={anchorEl}
@@ -128,36 +131,23 @@ const MenuHomeHeader = () => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        
         {!isLoggedIn && (
           <>
-            <StyledMenuItem
-              onClick={() => {
-                handleClickItemMenu("login");
-              }}
-            >
+            <StyledMenuItem onClick={() => handleClickItemMenu("login")}>
               <ListItemIcon>
                 <VpnKeyIcon fontSize="small" />
               </ListItemIcon>
               <ListItemText primary="Login" />
             </StyledMenuItem>
 
-            <StyledMenuItem
-              onClick={() => {
-                handleClickItemMenu("forgot-password");
-              }}
-            >
+            <StyledMenuItem onClick={() => handleClickItemMenu("forgot-password")}>
               <ListItemIcon>
                 <LockIcon fontSize="small" />
               </ListItemIcon>
               <ListItemText primary="Forgot Password" />
             </StyledMenuItem>
 
-            <StyledMenuItem
-              onClick={() => {
-                handleClickItemMenu("sign-up");
-              }}
-            >
+            <StyledMenuItem onClick={() => handleClickItemMenu("sign-up")}>
               <ListItemIcon>
                 <PersonAddIcon fontSize="small" />
               </ListItemIcon>
@@ -167,25 +157,21 @@ const MenuHomeHeader = () => {
         )}
         {isLoggedIn && (
           <>
-            <StyledMenuItem
-             onClick={() => {
-              handleClickItemMenu("profile");
-            }}
-            //  onClick={() => {
-            //    handleClickItemMenu("logout");
-            //  }}
-            >
+            <StyledMenuItem onClick={() => handleClickItemMenu("profile")}>
               <ListItemIcon>
                 <AccountBoxIcon fontSize="small" />
               </ListItemIcon>
               <ListItemText primary="Profile" />
             </StyledMenuItem>
 
-            <StyledMenuItem
-              onClick={() => {
-                handleClickItemMenu("logout");
-              }}
-            >
+            <StyledMenuItem onClick={() => handleClickItemMenu("change-password")}>
+              <ListItemIcon>
+                <LockIcon fontSize="small" />
+              </ListItemIcon>
+              <ListItemText primary="Change Password" />
+            </StyledMenuItem>
+
+            <StyledMenuItem onClick={() => handleClickItemMenu("logout")}>
               <ListItemIcon>
                 <ExitToAppIcon fontSize="small" />
               </ListItemIcon>
@@ -194,24 +180,30 @@ const MenuHomeHeader = () => {
           </>
         )}
       </StyledMenu>
+
+      {/* Modal hiện thông tin profile */}
+      <Profile
+        isVisible={isProfileModalVisible}
+        onCancel={handleProfileModalCancel}
+        data={data}
+        onSave={() => {
+          ShowProfile(); // Gọi lại hàm ShowProfile khi lưu
+        }}
+      />
+
+      {/* Modal đổi mật khẩu */}
+      <ChangePassword
+        isVisible={isChangePasswordModalVisible}
+        onCancel={handleChangePasswordModalCancel}
+        data={data}
+        onChangePassword={(values) => {
+          console.log(values);
+          // Gọi API để thay đổi mật khẩu ở đây
+        }}
+      />
     </div>
   );
 };
 
-// const mapStateToProps = (state) => {
-//   return {
-//     isLoggedIn: state.user.isLoggedIn,
-//     userInfo: state.user.userInfo,
-//     language: state.app.language,
-//   };
-// };
 
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     changeLanguageAppRedux: (language) =>
-//       dispatch(actions.changeLanguageApp(language)),
-//   };
-// };
-
-// export default connect(mapStateToProps, mapDispatchToProps)(MenuHomeHeader);
 export default MenuHomeHeader;

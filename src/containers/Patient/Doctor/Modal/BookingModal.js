@@ -192,7 +192,7 @@ class BookingModal extends Component {
       this.props.closeBookingClose();
     } else {
       this.setState({ isShowLoading: false });  
-      toast.error("Lỗi");
+      toast.error(res.errMessage);
     }
   };
   render() {

@@ -11,6 +11,7 @@ import './MenuHomeHeader.scss'
 import { toast } from "react-toastify";
 import { getProfileByUser } from "../../services/userService";
 import Profile from "../Patient/Profile";
+import ChangePassword from "../Patient/ChangePassword";
 
 const StyledMenu = withStyles({
   paper: {
@@ -104,8 +105,13 @@ const MenuHomeHeader = () => {
         break;
       case "admin":
         history.push("/admin-dashboard")
+        break;
       case "patient":
-        history.push("/admin-dashboard/patient/manage-appointment-patient")   
+        history.push("/admin-dashboard/patient/manage-appointment-patient")  
+        break;
+      case "password":
+        setIsChangePasswordModalVisible(true); // Hiện modal thay đổi mật khẩu
+        handleClose();   
       default:
       // code block
     }
@@ -186,6 +192,17 @@ const MenuHomeHeader = () => {
 <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
               <ListItemText primary="Hồ sơ" />
             </StyledMenuItem>
+            <StyledMenuItem
+             onClick={() => {
+              handleClickItemMenu("password");
+            }}
+            //  onClick={() => {
+            //    handleClickItemMenu("logout");
+            //  }}
+            >
+<svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24"><g><path d="M0,0h24v24H0V0z" fill="none"/></g><g><g><path d="M2,17h20v2H2V17z M3.15,12.95L4,11.47l0.85,1.48l1.3-0.75L5.3,10.72H7v-1.5H5.3l0.85-1.47L4.85,7L4,8.47L3.15,7l-1.3,0.75 L2.7,9.22H1v1.5h1.7L1.85,12.2L3.15,12.95z M9.85,12.2l1.3,0.75L12,11.47l0.85,1.48l1.3-0.75l-0.85-1.48H15v-1.5h-1.7l0.85-1.47 L12.85,7L12,8.47L11.15,7l-1.3,0.75l0.85,1.47H9v1.5h1.7L9.85,12.2z M23,9.22h-1.7l0.85-1.47L20.85,7L20,8.47L19.15,7l-1.3,0.75 l0.85,1.47H17v1.5h1.7l-0.85,1.48l1.3,0.75L20,11.47l0.85,1.48l1.3-0.75l-0.85-1.48H23V9.22z"/></g></g></svg>
+              <ListItemText primary="Đổi mật khẩu" />
+            </StyledMenuItem>
 
             <StyledMenuItem
              onClick={() => {
@@ -221,6 +238,17 @@ const MenuHomeHeader = () => {
             >
 <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
               <ListItemText primary="Hồ sơ" />
+            </StyledMenuItem>
+            <StyledMenuItem
+             onClick={() => {
+              handleClickItemMenu("password");
+            }}
+            //  onClick={() => {
+            //    handleClickItemMenu("logout");
+            //  }}
+            >
+<svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24"><g><path d="M0,0h24v24H0V0z" fill="none"/></g><g><g><path d="M2,17h20v2H2V17z M3.15,12.95L4,11.47l0.85,1.48l1.3-0.75L5.3,10.72H7v-1.5H5.3l0.85-1.47L4.85,7L4,8.47L3.15,7l-1.3,0.75 L2.7,9.22H1v1.5h1.7L1.85,12.2L3.15,12.95z M9.85,12.2l1.3,0.75L12,11.47l0.85,1.48l1.3-0.75l-0.85-1.48H15v-1.5h-1.7l0.85-1.47 L12.85,7L12,8.47L11.15,7l-1.3,0.75l0.85,1.47H9v1.5h1.7L9.85,12.2z M23,9.22h-1.7l0.85-1.47L20.85,7L20,8.47L19.15,7l-1.3,0.75 l0.85,1.47H17v1.5h1.7l-0.85,1.48l1.3,0.75L20,11.47l0.85,1.48l1.3-0.75l-0.85-1.48H23V9.22z"/></g></g></svg>
+              <ListItemText primary="Đổi mật khẩu" />
             </StyledMenuItem>
 
             <StyledMenuItem
@@ -258,6 +286,17 @@ const MenuHomeHeader = () => {
 <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
               <ListItemText primary="Hồ sơ" />
             </StyledMenuItem>
+            <StyledMenuItem
+             onClick={() => {
+              handleClickItemMenu("password");
+            }}
+            //  onClick={() => {
+            //    handleClickItemMenu("logout");
+            //  }}
+            >
+<svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24"><g><path d="M0,0h24v24H0V0z" fill="none"/></g><g><g><path d="M2,17h20v2H2V17z M3.15,12.95L4,11.47l0.85,1.48l1.3-0.75L5.3,10.72H7v-1.5H5.3l0.85-1.47L4.85,7L4,8.47L3.15,7l-1.3,0.75 L2.7,9.22H1v1.5h1.7L1.85,12.2L3.15,12.95z M9.85,12.2l1.3,0.75L12,11.47l0.85,1.48l1.3-0.75l-0.85-1.48H15v-1.5h-1.7l0.85-1.47 L12.85,7L12,8.47L11.15,7l-1.3,0.75l0.85,1.47H9v1.5h1.7L9.85,12.2z M23,9.22h-1.7l0.85-1.47L20.85,7L20,8.47L19.15,7l-1.3,0.75 l0.85,1.47H17v1.5h1.7l-0.85,1.48l1.3,0.75L20,11.47l0.85,1.48l1.3-0.75l-0.85-1.48H23V9.22z"/></g></g></svg>
+              <ListItemText primary="Đổi mật khẩu" />
+            </StyledMenuItem>
 
             <StyledMenuItem
              onClick={() => {
@@ -292,6 +331,17 @@ const MenuHomeHeader = () => {
         }}
       />
 
+
+      {/* Modal đổi mật khẩu */}
+      <ChangePassword
+        isVisible={isChangePasswordModalVisible}
+        onCancel={handleChangePasswordModalCancel}
+        data={data}
+        onChangePassword={(values) => {
+          console.log(values);
+          // Gọi API để thay đổi mật khẩu ở đây
+        }}
+      />
     </div>
   );
 };

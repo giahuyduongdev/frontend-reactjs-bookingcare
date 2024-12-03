@@ -1,0 +1,97 @@
+/* Modal Style */
+.profile-modal {
+    width: 1000px !important;
+    max-width: 90%; 
+    .ant-modal {
+        width: 1000px !important; // Đã thay đổi chiều rộng modal thành 1000px
+        max-width: 90%; // Đảm bảo modal không quá rộng trên các màn hình nhỏ
+        padding: 20px;
+        background-color: red !important;
+
+        // Đổi màu và kiểu chữ cho tiêu đề modal
+        .ant-modal-title {
+            font-size: 24px;
+            font-weight: 600;
+            text-align: center;
+            color: #4a4a4a;
+            margin-bottom: 15px;
+        }
+
+        // Thêm style cho nút đóng modal
+        .ant-modal-close-x {
+            color: #ff4d4f;
+            font-size: 18px;
+
+            &:hover {
+                color: #ff7875;
+                transition: color 0.3s ease;
+            }
+        }
+    }
+}
+
+/* Profile Container Style */
+.profile-container {
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+
+    .ant-descriptions-item-label {
+        font-weight: 500;
+        color: #1890ff;
+        font-size: 16px;
+    }
+
+    .ant-descriptions-item-content {
+        font-size: 15px;
+        color: #595959;
+    }
+
+    .ant-descriptions-bordered {
+        background-color: #fff;
+        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        margin-top: 20px;
+        padding: 15px;
+
+        .ant-descriptions-item-label {
+            background-color: #fafafa;
+            border: none;
+        }
+
+        .ant-descriptions-item-content {
+            background-color: #fff;
+            border: none;
+        }
+    }
+
+    .ant-descriptions-view {
+        border: 1px solid #d9d9d9;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .ant-descriptions-item-label {
+        background-color: #e6f7ff;
+        padding: 10px;
+    }
+
+    .ant-descriptions-item-content {
+        padding: 10px;
+    }
+}
+
+/* Avatar Section Style */
+.avatar-section {
+    text-align: center;
+    margin-bottom: 20px;
+
+    .ant-avatar {
+        border: 3px solid #1890ff;
+        transition: transform 0.3s ease;
+
+        &:hover {
+            transform: scale(1.05);
+        }
+    }
+}

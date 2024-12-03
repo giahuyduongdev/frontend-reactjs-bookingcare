@@ -1,31 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { withStyles } from "@material-ui/core/styles";
-
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-
-import VpnKeyIcon from "@material-ui/icons/VpnKey";
-import LockIcon from "@material-ui/icons/Lock";
-import PersonAddIcon from "@material-ui/icons/PersonAdd";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import HomeIcon from "@material-ui/icons/Home";
-import AccountBoxIcon from "@material-ui/icons/AccountBox";
-
-import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-
-import { connect } from "react-redux";
-import { LANGUAGES } from "../../utils";
 import { USER_ROLE } from '../../utils';
-
-import { changeLanguageApp } from "../../store/actions/appActions";
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../../store/actions";
-
 import './MenuHomeHeader.scss'
 import { toast } from "react-toastify";
+import { getProfileByUser } from "../../services/userService";
+import Profile from "../Patient/Profile";
 
 const StyledMenu = withStyles({
   paper: {
@@ -60,21 +45,31 @@ const StyledMenuItem = withStyles((theme) => ({
 
 const MenuHomeHeader = () => {
   //mapStateToProps Redux
-  const { isLoggedIn, userInfo, language } = useSelector((state) => ({
+  const { isLoggedIn,language } = useSelector((state) => ({
     isLoggedIn: state.user.isLoggedIn,
     userInfo: state.user.userInfo,
     language: state.app.language,
   }));
-  const dispatch = useDispatch();
+  const userInfo = useSelector((state) => state.user.userInfo);
+  const [data, setData] = useState([]);
+  const [isProfileModalVisible, setIsProfileModalVisible] = useState(false);
+  const [isChangePasswordModalVisible, setIsChangePasswordModalVisible] = useState(false); // Modal cho đổi mật khẩu
 
-  //   processLogout: () => dispatch(actions.processLogout()),
+  const ShowProfile = async () => {
+    if (userInfo && userInfo.email) {
+      const email = userInfo.email;
+      const response = await getProfileByUser(email);
+      setData(response.users);
+    } else {
+      console.log("User info is not available or email is missing.");
+    }
+  };
 
-  //   const [state, setState] = useState({
-  //     isLoggedIn: false,
-  //     userInfo: {},
-  //     language: "",
-  //   });
+  useEffect(() => {
+    ShowProfile();
+  }, [userInfo]);
 
+  const dispatch = useDispatch(); 
   let history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -103,7 +98,9 @@ const MenuHomeHeader = () => {
         history.push("/sign-up");
         break;
       case "profile":
-        history.push("/profile");
+        ShowProfile();
+        setIsProfileModalVisible(true); // Hiện modal profile
+        handleClose();
         break;
       case "admin":
         history.push("/admin-dashboard")
@@ -113,6 +110,16 @@ const MenuHomeHeader = () => {
       // code block
     }
   };
+
+
+  const handleProfileModalCancel = () => {
+    setIsProfileModalVisible(false);
+  };
+
+  const handleChangePasswordModalCancel = () => {
+    setIsChangePasswordModalVisible(false);
+  };
+
   return (
     <div>
       {/* <Button
@@ -275,26 +282,21 @@ const MenuHomeHeader = () => {
           </>
         )}
       </StyledMenu>
+            {/* Modal hiện thông tin profile */}
+            <Profile
+        isVisible={isProfileModalVisible}
+        onCancel={handleProfileModalCancel}
+        data={data}
+        onSave={() => {
+          ShowProfile(); // Gọi lại hàm ShowProfile khi lưu
+        }}
+      />
+
     </div>
   );
 };
 
-// const mapStateToProps = (state) => {
-//   return {
-//     isLoggedIn: state.user.isLoggedIn,
-//     userInfo: state.user.userInfo,
-//     language: state.app.language,
-//   };
-// };
 
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     changeLanguageAppRedux: (language) =>
-//       dispatch(actions.changeLanguageApp(language)),
-//   };
-// };
-
-// export default connect(mapStateToProps, mapDispatchToProps)(MenuHomeHeader);
 
 
 export default MenuHomeHeader;

@@ -174,6 +174,18 @@ const getUserInfoProfile = (userEmail) => {
   return axios.get(`/api/get-user-profile?email=${userEmail}`);
 };
 
+const changePassword = (data) => {
+  return axios.put("api/change-password-user", data);
+}
+
+const UpdateUser = (data) => {
+  return axios.put("api/edit-user", data);
+}
+
+const getProfileByUser = (email) => {
+  return axios.get(`/api/get-user-profile?email=${email}`);
+}
+
 export {
   getMonthlyRevenueSpecialty,
   getTopFourVipPatient,
@@ -215,5 +227,8 @@ export {
   postConfirmNewAccountEmail,
   cancelBookingEmail,
   getUserInfoProfile,
-  getAllAppointmentForPatient
+  getAllAppointmentForPatient,
+  changePassword,
+  UpdateUser,
+  getProfileByUser
 };

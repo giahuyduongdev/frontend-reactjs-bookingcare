@@ -31,7 +31,7 @@ class HomeFooter extends Component {
             </div>
             <div style={{ textAlign: 'left', display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
               <CgMail size={25} />
-              <text>nguyenhoangthinh5902@gmail.com</text>
+              <text>support@bookingcare.vn</text>
             </div>
             <div style={{ display: 'flex' }}>
               <text style={{ fontFamily: 'sans-serif', color: 'black', fontWeight: 'bolder' }}>Văn Phòng Tại Thành Phố Hồ Chí Minh</text>

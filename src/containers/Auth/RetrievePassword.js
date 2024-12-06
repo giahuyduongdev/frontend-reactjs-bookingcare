@@ -129,7 +129,7 @@ const RetrievePassword = () => {
           toast.success("Cập nhật mật khẩu mới thành công");
           history.push("/login");
         } else {
-          toast.error("Lỗi");
+          toast.error("Link đổi mật khẩu không tồn tại hoặc không còn hiệu lực");
         }
       }
     } else {
@@ -143,7 +143,7 @@ const RetrievePassword = () => {
         <Grid container spacing={1} className={classes.container}>
           <Grid item xs={12}>
             <Typography variant="h4" className={classes.titleRetrieve}>
-              Retrieve Password
+              Lấy lại mật khẩu
             </Typography>
           </Grid>
           <Grid item xs={12}>
@@ -164,7 +164,7 @@ const RetrievePassword = () => {
           <Grid item xs={12}>
             <FormControl className={clsx(classes.margin, classes.textField)}>
               <InputLabel htmlFor="standard-adornment-password">
-                New Password
+                Nhập mật khẩu mới
               </InputLabel>
               <Input
                 id="standard-adornment-password"
@@ -188,7 +188,7 @@ const RetrievePassword = () => {
           <Grid item xs={12}>
             <FormControl className={clsx(classes.margin, classes.textField)}>
               <InputLabel htmlFor="standard-adornment-password">
-                Confirm New Password
+                Nhập xác nhận mật khẩu
               </InputLabel>
               <Input
                 id="standard-adornment-password"
@@ -219,7 +219,7 @@ const RetrievePassword = () => {
               className={classes.ButtonbtnRetrieve}
               onClick={() => handleRetrievePassword()}
             >
-              Retrieve
+              Đổi mật khẩu
             </Button>
           </Grid>
         </Grid>

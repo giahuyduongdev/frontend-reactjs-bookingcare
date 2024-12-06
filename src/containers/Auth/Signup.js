@@ -153,7 +153,7 @@ class Signup extends Component {
       if (!this.state[arrInput[i]]) {
         isValid = false;
         // alert("Missing parameter: " + arrInput[i]);
-        toast.error("Chưa nhập: " + arrInput[i]);
+        toast.error("Chưa nhập " + arrInput[i]);
         break;
       }
     }

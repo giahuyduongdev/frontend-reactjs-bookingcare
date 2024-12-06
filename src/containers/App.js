@@ -103,7 +103,7 @@ class App extends Component {
                                     <Route path={path.VERIFY_EMAIL_BOOKING} component={VerifyEmail}/>
 
                                     <Route path={path.PROFILE} component={Profile} />
-                                    <Route path={path.CHANGE_PASSWORD} component={ChangePassword} />
+                                    <Route path ={path.CHANGE_PASSWORD} component={ChangePassword} />
                                     
                                     <Route path="*"><NotFound /></Route>
                                 </Switch>

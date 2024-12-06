@@ -107,7 +107,7 @@ const ChangePassword = ({ isVisible, onCancel, onChangePassword, data }) => {
                         { required: true, message: "Vui lòng nhập mật khẩu mới!" },
                         { min: 8, message: "Mật khẩu phải có ít nhất 8 ký tự" },
                         {
-                            pattern: /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+                            pattern: /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&_])[A-Za-z\d@$!%*?&_]{8,}$/,
                             message: "Mật khẩu phải chứa ít nhất 1 ký tự viết hoa, 1 ký tự số và 1 ký tự đặc biệt!",
                         }
                     ]}

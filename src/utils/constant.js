@@ -17,6 +17,7 @@ export const path = {
     LIST_MEDICAL_FACILITY: "/list-medical-facility",
     ADMIN_DASHBOARD: "/admin-dashboard",
     PROFILE: "/profile/:id",
+    CHANGE_PASSWORD: "/change-password"
   };
   
   export const LANGUAGES = {

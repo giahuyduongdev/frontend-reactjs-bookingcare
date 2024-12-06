@@ -48,11 +48,6 @@ class HomeHeader extends Component {
         this.props.history.push(`/list-oustanding-doctor`);
     }
   };
-  returnToUpdateLater = () => {
-    if (this.props.history) {
-        this.props.history.push(`/update-later`);
-    }
-  };
   render() {
     let language = this.props.language;
     return (
@@ -104,21 +99,11 @@ class HomeHeader extends Component {
                   <FormattedMessage id="homeheader.select-doctor" />
                 </div>
               </div>
-              <div className="child-content" onClick={() =>{this.returnToUpdateLater()}}>
-                <div>
-                  <b>
-                    <FormattedMessage id="homeheader.fee" />
-                  </b>
-                </div>
-                <div className="subs-title">
-                  <FormattedMessage id="homeheader.check-health" />
-                </div>
-              </div>
             </div>
             <div className="right-content">
               <div className="support">
-                <i className="fas fa-question-circle"></i>
-                <FormattedMessage id="homeheader.support" />
+                {/* <i className="fas fa-question-circle"></i>
+                <FormattedMessage id="homeheader.support" /> */}
               </div>
               <div
                 className={
@@ -175,9 +160,7 @@ class HomeHeader extends Component {
             </div>
             <div className="content-down">
               <div className="options">
-                <div className="option-child" onClick={() => {
-                  this.returnToSpecialty()
-                }}>
+                <div className="option-child">
                   <div className="icon-child">
                     <i className="fas fa-hospital-alt"></i>
                   </div>
@@ -185,7 +168,7 @@ class HomeHeader extends Component {
                     <FormattedMessage id="banner.child1" />
                   </div>
                 </div>
-                <div className="option-child" onClick={() =>{this.returnToUpdateLater()}}>
+                <div className="option-child">
                   <div className="icon-child">
                     <i className="fas fa-mobile-alt"></i>
                   </div>
@@ -193,7 +176,7 @@ class HomeHeader extends Component {
                     <FormattedMessage id="banner.child2" />
                   </div>
                 </div>
-                <div className="option-child" onClick={() =>{this.returnToUpdateLater()}}>
+                <div className="option-child">
                   <div className="icon-child">
                     <i className="fas fa-procedures"></i>
                   </div>
@@ -201,7 +184,7 @@ class HomeHeader extends Component {
                     <FormattedMessage id="banner.child3" />
                   </div>
                 </div>
-                <div className="option-child" onClick={() =>{this.returnToUpdateLater()}}>
+                <div className="option-child">
                   <div className="icon-child">
                     <i className="fas fa-flask"></i>
                   </div>
@@ -209,7 +192,7 @@ class HomeHeader extends Component {
                     <FormattedMessage id="banner.child4" />
                   </div>
                 </div>
-                <div className="option-child" onClick={() =>{this.returnToUpdateLater()}}>
+                <div className="option-child">
                   <div className="icon-child">
                     <i className="fas fa-user-md"></i>
                   </div>
@@ -217,7 +200,7 @@ class HomeHeader extends Component {
                     <FormattedMessage id="banner.child5" />
                   </div>
                 </div>
-                <div className="option-child" onClick={() =>{this.returnToUpdateLater()}}>
+                <div className="option-child">
                   <div className="icon-child">
                     <i className="fas fa-briefcase-medical"></i>
                   </div>

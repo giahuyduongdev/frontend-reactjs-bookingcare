@@ -1,13 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal, Row, Col, Avatar, Descriptions, Button, Input, notification } from "antd";
-import { UserOutlined, MailOutlined, PhoneOutlined, HomeOutlined, EditOutlined } from '@ant-design/icons';
+import { UserOutlined, MailOutlined, PhoneOutlined, HomeOutlined } from '@ant-design/icons';
 import './Profile.scss'; // Custom CSS
-import { useSelector } from "react-redux";
 import { UpdateUser } from "../../services/userService";
 // Giả sử đây là API của bạn
 
 const Profile = ({ isVisible, onCancel, data, onSave }) => {
-  const userInfo = useSelector((state) => state.user.userInfo);
   const avatarUrl = data.image && data.image.data
     ? `data:image/jpeg;base64,${Buffer.from(data.image.data).toString('base64')}`
     : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPUPPObe8bkov6CluwLDx5FNgla0wkgvJxAgPhrGxg_ZcXu36M1nBLZDnHfRyltQNjZVw4VROMhokT0D4mTrQ57g";
@@ -66,6 +64,13 @@ const Profile = ({ isVisible, onCancel, data, onSave }) => {
       [name]: value,
     }));
   };
+
+  useEffect(() => {
+    if (isVisible) {
+      setEditedData(data);
+    }
+  }, [isVisible, data]);
+
   return (
     <Modal
       title="User Profile"
@@ -95,13 +100,7 @@ const Profile = ({ isVisible, onCancel, data, onSave }) => {
                   autoFocus
                 />
               ) : (
-                <>
-                  {editedData.lastName}
-                  <EditOutlined
-                    onClick={handleEdit}
-                    style={{ marginLeft: 8, cursor: 'pointer' }}
-                  />
-                </>
+                editedData.lastName
               )}
             </Descriptions.Item>
 
@@ -114,13 +113,7 @@ const Profile = ({ isVisible, onCancel, data, onSave }) => {
                   autoFocus
                 />
               ) : (
-                <>
-                  {editedData.firstName}
-                  <EditOutlined
-                    onClick={handleEdit}
-                    style={{ marginLeft: 8, cursor: 'pointer' }}
-                  />
-                </>
+                editedData.firstName
               )}
             </Descriptions.Item>
 
@@ -137,13 +130,7 @@ const Profile = ({ isVisible, onCancel, data, onSave }) => {
                   autoFocus
                 />
               ) : (
-                <>
-                  {editedData.phonenumber}
-                  <EditOutlined
-                    onClick={handleEdit}
-                    style={{ marginLeft: 8, cursor: 'pointer' }}
-                  />
-                </>
+                editedData.phonenumber
               )}
             </Descriptions.Item>
 
@@ -156,13 +143,7 @@ const Profile = ({ isVisible, onCancel, data, onSave }) => {
                   autoFocus
                 />
               ) : (
-                <>
-                  {editedData.address}
-                  <EditOutlined
-                    onClick={handleEdit}
-                    style={{ marginLeft: 8, cursor: 'pointer' }}
-                  />
-                </>
+                editedData.address
               )}
             </Descriptions.Item>
 
@@ -171,7 +152,7 @@ const Profile = ({ isVisible, onCancel, data, onSave }) => {
             </Descriptions.Item>
 
             <Descriptions.Item label="Giới tính">
-              {editedData.gender === 1 ? 'Male' : editedData.gender === 2 ? 'Female' : 'Other'}
+              {editedData.gender === 'M' ? 'Nam' : editedData.gender === 'F' ? 'Nữ' : 'Other'}
             </Descriptions.Item>
           </Descriptions>
 

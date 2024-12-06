@@ -187,7 +187,7 @@ const MenuHomeHeader = () => {
         onCancel={handleProfileModalCancel}
         data={data}
         onSave={() => {
-          ShowProfile(); // Gọi lại hàm ShowProfile khi lưu
+          ShowProfile(userInfo.email); // Gọi lại hàm ShowProfile khi lưu
         }}
       />
 

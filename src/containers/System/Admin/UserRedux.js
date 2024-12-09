@@ -41,9 +41,11 @@ class UserRedux extends Component {
   }
 
   async componentDidMount() {
+    this.setState({ isShowLoading: true });
     this.props.getGenderStart();
     this.props.getPositionStart();
     this.props.getRoleStart();
+    this.setState({ isShowLoading: false });
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {

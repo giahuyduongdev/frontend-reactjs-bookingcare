@@ -164,7 +164,6 @@ class ManageScheduleOneDoctor extends Component {
   };
   render() {
     let { rangeTime } = this.state;
-    console.log(rangeTime);
     let { language } = this.props;
     let yesterday = new Date(new Date().setDate(new Date().getDate() - 1));
     return (

@@ -14,7 +14,6 @@ import "slick-carousel/slick/slick-theme.css";
 
 class HomePage extends Component {
   render() {
-    console.log("this.props.userInfo", this.props.userInfo);
     let settings = {
       dots: false,
       infinite: false,

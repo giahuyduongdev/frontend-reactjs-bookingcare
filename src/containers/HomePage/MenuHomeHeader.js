@@ -61,8 +61,6 @@ const MenuHomeHeader = () => {
       const email = userInfo.email;
       const response = await getProfileByUser(email);
       setData(response.users);
-    } else {
-      console.log("User info is not available or email is missing.");
     }
   };
 

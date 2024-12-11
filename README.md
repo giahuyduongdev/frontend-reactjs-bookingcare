@@ -65,7 +65,7 @@ REACT_APP_ROUTER_BASE_NAME=
 4. Start project
 
 ```bash
-  npm run build
+  npm start
 ```
 
 <!-- Contributing -->

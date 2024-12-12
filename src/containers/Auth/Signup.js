@@ -74,17 +74,31 @@ class Signup extends Component {
       });
     }
   }
-  
+
 
   handleOnChangeInput = (event, id) => {
-    let copyState = { ...this.state };
-    copyState[id] = event.target.value;
+    let value = event.target.value;
+
+    // Kiểm tra các input 'phonenumber', 'firstName', 'lastName'
+    if (id === "phonenumber") {
+      // Chỉ cho phép nhập số cho 'phonenumber'
+      if (/[^0-9]/.test(value)) {
+        value = value.replace(/[^0-9]/g, ''); // Xóa bỏ các ký tự không phải số
+      }
+    } else if (id === "firstName" || id === "lastName") {
+      // Chỉ cho phép nhập chữ cho 'firstName' và 'lastName'
+      if (/[^a-zA-Z]/.test(value)) {
+        value = value.replace(/[^a-zA-Z]/g, ''); // Xóa bỏ các ký tự không phải chữ
+      }
+    }
+
     this.setState({
-      ...copyState,
+      [id]: value,
     });
   };
 
-  
+
+
   handleOnChangeDatePicker = (date) => {
     this.setState({
       birthday: date[0],
@@ -105,60 +119,89 @@ class Signup extends Component {
 
   createNewUser = async () => {
     let isValid = this.checkValidateInput();
-    if(isValid === true){
+    if (isValid) {
       this.setState({ isShowLoading: true });
-    try {
-      let response = await registerNewUserService({
-        email: this.state.email,
-        password: this.state.password,
-        firstName: this.state.firstName,
-        lastName: this.state.lastName,
-        address: this.state.address,
-        phonenumber: this.state.phonenumber,
-        birthday: this.state.birthday,
-        gender: this.state.selectedGender.value
-
-      });
-      if (response && response.errCode !== 0) {
-        toast.error(response.errMessage);
-        this.setState({ isShowLoading: false });
-      } else {
-        toast.success("Tài khoản được tạo, vui lòng check email để xác thực");
-        this.setState({ isShowLoading: false });
-        this.setState({
-          password: "",
-          email: "",
-          firstName: "",
-          lastName: "",
-          address: "",
-          phonenumber: "",
-          selectedGender: "",
-          isShowPassword: false,
+      try {
+        let response = await registerNewUserService({
+          email: this.state.email,
+          password: this.state.password,
+          firstName: this.state.firstName,
+          lastName: this.state.lastName,
+          address: this.state.address,
+          phonenumber: this.state.phonenumber,
+          birthday: this.state.birthday,
+          gender: this.state.selectedGender.value,
         });
-        this.props.history.push("/login");
-        await postConfirmNewAccount(response.data);
-        
-        
+        if (response && response.errCode !== 0) {
+          toast.error(response.errMessage);
+          this.setState({ isShowLoading: false });
+        } else {
+          toast.success("Tài khoản được tạo, vui lòng check email để xác thực");
+          this.setState({ isShowLoading: false });
+          this.setState({
+            password: "",
+            email: "",
+            firstName: "",
+            lastName: "",
+            address: "",
+            phonenumber: "",
+            selectedGender: "",
+            isShowPassword: false,
+          });
+          this.props.history.push("/login");
+          await postConfirmNewAccount(response.data);
+        }
+      } catch (e) {
+        console.log(e);
       }
-    } catch (e) {
-      console.log(e);
-    }
     }
   };
 
   checkValidateInput = () => {
     let isValid = true;
     let arrInput = ["email", "password", "firstName", "lastName", "address", "phonenumber", "birthday", "selectedGender"];
+
+    // Kiểm tra tất cả các trường không được rỗng
     for (let i = 0; i < arrInput.length; i++) {
       if (!this.state[arrInput[i]]) {
         isValid = false;
-        // alert("Missing parameter: " + arrInput[i]);
         toast.error("Chưa nhập " + arrInput[i]);
         break;
       }
     }
+
+    // Kiểm tra định dạng email hợp lệ
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (isValid && !emailRegex.test(this.state.email)) {
+      isValid = false;
+      toast.error("Email không hợp lệ!");
+    }
+
+    // Kiểm tra mật khẩu
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+={}\[\]:;"'<>,.?/-]).{8,}$/;
+    if (isValid && !passwordRegex.test(this.state.password)) {
+      isValid = false;
+      toast.error("Mật khẩu phải có ít nhất 1 chữ hoa, 1 chữ thường, 1 số, và 1 ký tự đặc biệt, dài hơn 8 ký tự");
+    }
+
+    // Kiểm tra số điện thoại Việt Nam
+    const phoneRegex = /^(0[3|5|7|8|9])+([0-9]{8})$/;
+    if (isValid && !phoneRegex.test(this.state.phonenumber)) {
+      isValid = false;
+      toast.error("Số điện thoại không hợp lệ!");
+    }
+
+    // Kiểm tra ngày sinh
+    const today = new Date();
+    const birthDate = new Date(this.state.birthday);
+    if (isValid && birthDate > today) {
+      isValid = false;
+      toast.error("Ngày sinh không thể lớn hơn ngày hiện tại!");
+    }
+
     return isValid;
   };
+
 
   handleAddNewUser = () => {
     let isValid = this.checkValidateInput();
@@ -173,10 +216,10 @@ class Signup extends Component {
     return (
       <div className="login-background">
         <HomeHeader isShowBanner={false} />
-              <LoadingOverlay
-        active={this.state.isShowLoading}
-        spinner={<BounceLoader color={"#86e7d4"} size={60} />}
-      ></LoadingOverlay>
+        <LoadingOverlay
+          active={this.state.isShowLoading}
+          spinner={<BounceLoader color={"#86e7d4"} size={60} />}
+        ></LoadingOverlay>
         <div className="signup-container">
           <div className="login-content row">
             <div className="col-12 text-login">Đăng Ký</div>
@@ -264,18 +307,18 @@ class Signup extends Component {
             <div className="col-12 form-group login-input">
               <label>Ngày sinh:</label>
               <DatePicker
-                    onChange={this.handleOnChangeDatePicker}
-                    className="form-control"
-                    value={this.state.birthday}
-                  />
+                onChange={this.handleOnChangeDatePicker}
+                className="form-control"
+                value={this.state.birthday}
+              />
             </div>
             <div className="col-12 form-group login-input">
               <label>Giới tính:</label>
               <Select
-                    value={this.state.selectedGender}
-                    onChange={this.handleChangeSelect}
-                    options={this.state.genders}
-                  />
+                value={this.state.selectedGender}
+                onChange={this.handleChangeSelect}
+                options={this.state.genders}
+              />
             </div>
             {/* <div className="col-12" style={{ color: "red" }}>
               {this.state.errMessage}

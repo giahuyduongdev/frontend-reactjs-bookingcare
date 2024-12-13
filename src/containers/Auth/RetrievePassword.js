@@ -95,6 +95,14 @@ const RetrievePassword = () => {
     event.preventDefault();
   };
 
+
+  const passwordValidation = (password) => {
+    // Minimum 8 characters, 1 uppercase letter, 1 number, and 1 special character
+    const regex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&_])[A-Za-z\d@$!%*?&_]{8,}$/;
+    return regex.test(password);
+  };
+
+
   useEffect(() => {
     document.title = "Retrieve Password";
     let params = new URLSearchParams(window.location.search);
@@ -111,10 +119,11 @@ const RetrievePassword = () => {
       values.newPassword.trim().localeCompare(values.confirmNewPassword.trim())
     );
     if (
-      values.newPassword
+      (values.newPassword
         .trim()
-        .localeCompare(values.confirmNewPassword.trim()) === 0
-    ) {
+        .localeCompare(values.confirmNewPassword.trim()) === 0) && passwordValidation(values.newPassword)
+      )
+      {
       let params = new URLSearchParams(window.location.search);
       if (params.has("tokenUser") && params.has("email")) {
         let tokenUser = params.get("tokenUser");
@@ -129,11 +138,31 @@ const RetrievePassword = () => {
           toast.success("Cập nhật mật khẩu mới thành công");
           history.push("/login");
         } else {
-          toast.error("Link đổi mật khẩu không tồn tại hoặc không còn hiệu lực");
+          if(values.newPassword === ''){
+            toast.error("Chưa nhập mật khẩu mới");
+          }
+          else{
+            toast.error("Link đổi mật khẩu không còn hiệu lực");
+          }
         }
       }
     } else {
-      toast.error("Mật khẩu mới và xác thực mật khẩu không giống nhau")
+      if(values.newPassword === '')
+      {
+        toast.error("Chưa nhập mật khẩu mới");
+        return;
+      }
+      if (!passwordValidation(values.newPassword)) {
+        toast.error("Mật khẩu phải có ít nhất 8 ký tự, 1 chữ hoa, 1 số và 1 ký tự đặc biệt.");
+        return;
+      }
+      if(values.confirmNewPassword === '')
+      {
+        toast.error("Chưa nhập xác nhận mật khẩu mới");
+      }
+      else{
+        toast.error("Mật khẩu mới và xác thực mật khẩu không giống nhau")
+      }
     };
   };
   const classes = useStyles();

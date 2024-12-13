@@ -149,14 +149,45 @@ class Signup extends Component {
   checkValidateInput = () => {
     let isValid = true;
     let arrInput = ["email", "password", "firstName", "lastName", "address", "phonenumber", "birthday", "selectedGender"];
+
+    // Kiểm tra tất cả các trường không được rỗng
     for (let i = 0; i < arrInput.length; i++) {
       if (!this.state[arrInput[i]]) {
         isValid = false;
-        // alert("Missing parameter: " + arrInput[i]);
         toast.error("Chưa nhập " + arrInput[i]);
         break;
       }
     }
+
+    // Kiểm tra định dạng email hợp lệ
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (isValid && !emailRegex.test(this.state.email)) {
+      isValid = false;
+      toast.error("Email không hợp lệ!");
+    }
+
+    // Kiểm tra mật khẩu
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+={}\[\]:;"'<>,.?/-]).{8,}$/;
+    if (isValid && !passwordRegex.test(this.state.password)) {
+      isValid = false;
+      toast.error("Mật khẩu phải có ít nhất 1 chữ hoa, 1 chữ thường, 1 số, và 1 ký tự đặc biệt, dài hơn 8 ký tự");
+    }
+
+    // Kiểm tra số điện thoại Việt Nam
+    const phoneRegex = /^(0[3|5|7|8|9])+([0-9]{8})$/;
+    if (isValid && !phoneRegex.test(this.state.phonenumber)) {
+      isValid = false;
+      toast.error("Số điện thoại không hợp lệ!");
+    }
+
+    // Kiểm tra ngày sinh
+    const today = new Date();
+    const birthDate = new Date(this.state.birthday);
+    if (isValid && birthDate > today) {
+      isValid = false;
+      toast.error("Ngày sinh không thể lớn hơn ngày hiện tại!");
+    }
+
     return isValid;
   };
 
